@@ -2,10 +2,11 @@
 Herramienta de monitoreo de variables climaticas para la generación de alertas tempranas para mitiga los efectos de las heladas en los cultivos del departamento de Boyaca- Col
 
 # Arbol de directorios
-- Articulo: Contiene un Articulo corto de investigación enformato IEEE.
-- Docs: Contiene la documentación o linkeos hacia la misma
-- Hardware:
-- Software:
+- Articulo: Contiene un Articulo cort ode investigación enformato IEEE.
+- Docs: Contiene la documentación o linkeos hacia la misma (Texto, links, Imagenes)
+- Hardware: Referente al hardware desarrollado (Esquemas, PCBs)
+- Images: Aqui colocar imagenes solamente referente a el desarrollo del proyecto.
+- Software: Principalmente el codigo desarrollado para el proeycto.
 
 # Attributions
 Basada en la idea de 
