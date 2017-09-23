@@ -48,9 +48,10 @@ def wifi_connect():
             sta_if.active(True)
             sta_if.connect(SSID, PASSWORD)
             while not sta_if.isconnected():
-                pass
-        if debug_mode == 1:
-            print('network config:', sta_if.ifconfig())
+                if debug_mode == 1:
+                    print('network config:', sta_if.ifconfig())
+                else:
+                    pass
 
 
 def MQTTclient():
@@ -109,7 +110,7 @@ def setup():
     debugMode()
     wifi_connect()
     MQTTclient()
-    sensorConected()
+    sensorConected()a
     # loop
     readData()  # Lectura de sensores
     # MQTTSend()  # Enviar datos mediante el protocolo MQTT
@@ -123,7 +124,7 @@ def loop():
     #     MQTTSend()  # Enviar datos mediante el protocolo MQTT
 
 
-#######################     MAIN    #######################
+# ######################     MAIN    #######################
 if __name__ == '__main__':
     try:
         setup()
