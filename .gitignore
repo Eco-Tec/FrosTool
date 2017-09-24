@@ -1,0 +1,8 @@
+﻿#Linux directory
+.directory
+# KiCad files 
+*.bak 
+# Backup Freecad files
+*.fcstd1
+# Config ESP8266
+/Software/Node-ESP8266/v3.0/config.py

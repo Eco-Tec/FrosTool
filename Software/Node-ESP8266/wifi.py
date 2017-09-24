@@ -1,21 +1,23 @@
 import network
-from config import SSID,PASSWORD
+from config import SSID, PASSWORD
 import time
+
 
 class WIFI():
     """Clase para conexion y desconexion del modulo de la red wifi"""
+
     def __init__(self):
         super(WIFI, self).__init__()
-        #self.arg = arg
-        self.estado={0 : 'no connection and no activity', 1 : 'connecting in progress',
-                    2 : 'failed due to incorrect password', 3:'failed because no access point replied',
-                    4:'failed due to other problems',5:'connection successful',255:""}
-        self.sta_if=network.WLAN(network.STA_IF)
-        #self.ap_if =WLAN(network.AP_IF)
+        # self.arg = arg
+        self.estado = {0: 'no connection and no activity', 1: 'connecting in progress',
+                       2: 'failed due to incorrect password', 3: 'failed because no access point replied',
+                       4: 'failed due to other problems', 5: 'connection successful', 255: ""}
+        self.sta_if = network.WLAN(network.STA_IF)
+        # self.ap_if =WLAN(network.AP_IF)
         self.disconnect()
         self.sta_if.active(False)
 
-    def connect(self , name=SSID , passw=PASSWORD):
+    def connect(self, name=SSID, passw=PASSWORD):
         """Establece la conexion, recibe el nombre
            y clave de la red """
 
@@ -23,23 +25,22 @@ class WIFI():
             print('connecting to network...')
             self.sta_if.active(True)
             self.sta_if.connect(name, passw)
-            m=0
+            m = 0
             time.sleep_ms(5000)
             self.event(self.status())
         else:
             self.status()
 
-    def event(self,a):
-        if a==1:
+    def event(self, a):
+        if a == 1:
             time.sleep_ms(5000)
             self.event(self.status())
-            #self.connect()
-        #elif a==2:
+            # self.connect()
+        # elif a==2:
         #    print(str(self.estado[a]))
-        #else:
+        # else:
         #    print(str(self.estado[a]))
             #print("Error desconocido")
-
 
     def disconnect(self):
         """Termina una conexión existente y dejas
