@@ -78,7 +78,7 @@ def sensorConected():
     "Conmuta entre los diferentes sensores: DHT11/DHT22..."
     global s_dht
     s_dht = dht.DHT22(machine.Pin(pin_sensor))
-    #s_dht = dht.DHT11(machine.Pin(pin_sensor))
+    # s_dht = dht.DHT11(machine.Pin(pin_sensor))
     if debug_mode == 1:
         print('Sensor:', s_dht)
 
@@ -92,7 +92,7 @@ def readData():
         pin_led_debug.value(not pin_led_debug.value())  # Debug visual
 
 
-def MQTTSend(self):
+def MQTTSend():
     "Envio Datos mediante el protocolo MQTT"
     from config import TOPIC1, TOPIC2
     try:
@@ -110,10 +110,10 @@ def setup():
     debugMode()
     wifi_connect()
     MQTTclient()
-    sensorConected()a
+    sensorConected()
     # loop
     readData()  # Lectura de sensores
-    # MQTTSend()  # Enviar datos mediante el protocolo MQTT
+    MQTTSend()  # Enviar datos mediante el protocolo MQTT
 
 
 def loop():
