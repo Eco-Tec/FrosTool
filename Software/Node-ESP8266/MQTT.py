@@ -1,3 +1,4 @@
+import time
 from umqtt.simple import MQTTClient
 from ubinascii import hexlify
 from machine import unique_id
@@ -37,11 +38,12 @@ class MQTT():
     def send(self, topic, data):
         "Envio Datos mediante el protocolo MQTT"
         try:
+            self.connect()
+            self.client_mqtt.publish(topic, str(data))
+            self.disconnect()
+            time.sleep_ms(200)
             if self.debug_mode == 1:
-                print("Enviado dato ....")
-                self.connect()
-                self.client_mqtt.publish(topic, str(data))
-                # self.disconnect()
+                print("Enviado dato ....", topic, data)
         except Exception as e:
             self.disconnect()
             if self.debug_mode == 1:

@@ -15,14 +15,17 @@
 
 """
 
-
-from wifi import WIFI
+from config import TOPIC1, TOPIC2
+from sensores import DHT22
 from MQTT import MQTT
+from wifi import WIFI
+
 
 if __name__ == '__main__':
     mqtt = MQTT()
     wifi = WIFI()
+    sensor1 = DHT22(pin_dht=4)
     wifi.connect()
-    mqtt.send("/cultivo/temp", "data")
-    mqtt.send("/cultivo/temp", "data2")
-    mqtt.send("/cultivo/temp", "data4")
+    temperatura, humedad = sensor1.readData()
+    mqtt.send(TOPIC1, temperatura)
+    mqtt.send(TOPIC2, humedad)

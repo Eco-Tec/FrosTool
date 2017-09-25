@@ -1,6 +1,6 @@
+import time
 import network
 from config import SSID, PASSWORD
-import time
 
 
 class WIFI():
