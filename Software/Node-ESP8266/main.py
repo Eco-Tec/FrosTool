@@ -19,11 +19,13 @@ from config import TOPIC1, TOPIC2
 from sensores import DHT22
 from MQTT import MQTT
 from wifi import WIFI
+from debug import debug_mode
 
 
 if __name__ == '__main__':
-    mqtt = MQTT()
-    wifi = WIFI()
+    debug=debug_mode(False)
+    mqtt = MQTT(debug)
+    wifi = WIFI(debug)
     sensor1 = DHT22(pin_dht=4)
     wifi.connect()
     temperatura, humedad = sensor1.readData()
