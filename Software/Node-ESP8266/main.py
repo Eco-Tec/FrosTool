@@ -6,8 +6,8 @@
     Copyright(c) 2017 by fandres "Fabian Salamanca" <fabian.salamanca@openmailbox.org>
     Distributed under GPLv3+
     Based On https://github.com/fandres/Monitor-heladas/blob/master/Code/main.py
-    Author  - Fabian A. Salamanca F. 
-            - Marlon mauricio Moreno
+    Author  - Fabian A. Salamanca F (@fandres).
+            - Marlon mauricio Moreno (@mau_rinc2010).
     Hardware: ESP8266
     Pin distribution(Default)
     Pin 4   ->  Pin sensor(DHT11/DHT22), Data(IN)
