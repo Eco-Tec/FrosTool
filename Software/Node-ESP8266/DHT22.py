@@ -3,7 +3,7 @@ import machine
 
 
 class DHT22():
-    "Clase padre, Monitoreo del dispositivo para micropython: "
+    "Clase referente solo al sensor DHT22 (Pines, topicos, lectura de datos)"
 
     def __init__(self, debug, name, pin_dht=4):
         self.debug = debug
@@ -20,6 +20,6 @@ class DHT22():
             self.debug.printDebug(self.name)
             self.debug.printDebug(("Temperatura ", self.s_dht.temperature()))
             self.debug.printDebug(("Humedad  ", self.s_dht.humidity()))
-            return({self.temp:self.s_dht.temperature(),self.hume:self.s_dht.humidity()})
+            return({self.temp: self.s_dht.temperature(), self.hume: self.s_dht.humidity()})
         except Exception as e:
             self.debug.printDebug(("No fue posible la lectura de Datos error:", e))

@@ -12,9 +12,9 @@
     Pin distribution(Default)
     Pin 4   ->  Pin sensor(DHT11/DHT22), Data(IN)
     Pin 2   ->  Debug Visual(Default=Off), Led On Userled: for development board ESP8266
-
 """
-from DHT22 import DHT22
+
+
 from MQTT import MQTT
 from wifi import WIFI
 from cultivo import Cultivo
@@ -22,10 +22,10 @@ from debug import debug_mode
 
 
 if __name__ == '__main__':
-    debug=debug_mode(True)
+    debug = debug_mode(True)
     mqtt = MQTT(debug)
     wifi = WIFI(debug)
     wifi.connect()
-    cultivo=Cultivo(debug,mqtt)
+    cultivo = Cultivo(debug, mqtt)
     cultivo.read_sensores()
     cultivo.send_data()

@@ -36,7 +36,6 @@ class WIFI():
             time.sleep_ms(5000)
             self.event(self.status())
 
-
     def disconnect(self):
         """Termina una conexión existente y deja
            disponble el modulo para resivir otra conexion"""
