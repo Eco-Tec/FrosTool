@@ -19,13 +19,15 @@ from MQTT import MQTT
 from wifi import WIFI
 from cultivo import Cultivo
 from debug import debug_mode
+from time import sleep_ms
 
 
 if __name__ == '__main__':
-    debug = debug_mode(True)
+    debug = debug_mode(False)
     mqtt = MQTT(debug)
     wifi = WIFI(debug)
     wifi.connect()
     cultivo = Cultivo(debug, mqtt)
-    cultivo.read_sensores()
-    cultivo.send_data()
+    while(1):
+        cultivo.read_sensores()
+        cultivo.send_data()

@@ -1,4 +1,4 @@
-from config import sens
+from config import sensor_list
 from DHT22 import DHT22
 import time
 
@@ -12,13 +12,13 @@ class Cultivo():
         self.mqtt = mqtt
         self.sensores = {}
         self.data = {}
-        # self.sensor=sens
+        # self.sensor=sensor_list
         self.crear_cultivo()
 
-    def crear_cultivo(self, sensor=sens):
+    def crear_cultivo(self, sensor=sensor_list):
         "Agrega los diferentes sensores del cultivo, "
-        for i, n in sens.items():
-            self.add_sensor(i, n)
+        for nombre_s, tipo_s in sensor_list.items():
+            self.add_sensor(nombre_s, tipo_s)
 
     def add_sensor(self, name, tipo):
         "instancia los diferentes tipos de sensor (Pines...)"
@@ -27,14 +27,14 @@ class Cultivo():
 
     def read_sensores(self):
         "Realzia la lectura de las variables fisicas de los diferentes tipos de sensores"
-        for i in sens:
-            self.data[i] = self.sensores[i].readData()
+        for sensor in sensor_list:
+            self.data[sensor] = self.sensores[sensor].readData()
             time.sleep_ms(500)
         self.debug.printDebug(self.data)
 
     def send_data(self):
         "Envia los datos de los diferentes sensores haciendo uso del protocolo MQTT"
-        for i in sens:
-            for n, m in self.data[i].items():
-                self.mqtt.send(n, m)
-                # self.debug.printDebug(n)
+        for sensor in sensor_list:
+            for topic, data in self.data[sensor].items():
+                self.mqtt.send(topic, data)
+                # self.debug.printDebug(topic)

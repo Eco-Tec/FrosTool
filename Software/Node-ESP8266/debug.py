@@ -20,7 +20,7 @@ class debug_mode():
         """Desactive debug"""
         print("Modo debug desactivado ....")
         esp.osdebug(0)
-        self.client_mqtt.DEBUG = True
+        #self.client_mqtt.DEBUG = True
 
     def printDebug(self, msm):
         """Envia mensajes por debug si esta activado"""
