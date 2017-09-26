@@ -7,3 +7,4 @@ TOPIC2 = b"/cultivo/hum"
 TOPIC3 = b"/sensor1/set/temp"
 TOPIC4 = b"/sensor1/set/hum"
 TOPIC5 = b"/sensor1/alarma"
+sensores={"sensor 1":"DHT22"}
