@@ -3,24 +3,15 @@ from DHT22 import DHT22
 import time
 
 
-<<<<<<< HEAD
-    def __init__(self,debug,mqtt):
-        super(cultivo, self).__init__()
-        self.mqtt=mqtt
-        self.debug=debug
-        self.sensores={}
-        self.data={}
-        #self.sensor=sens
-=======
 class Cultivo():
 
-    def __init__(self, debug):
+    def __init__(self, debug,mqtt):
         super(Cultivo, self).__init__()
         self.debug = debug
+        self.mqtt=mqtt
         self.sensores = {}
         self.data = {}
         # self.sensor=sens
->>>>>>> a17a59d61b3dcceac05dbb0d18e313ff4902ddf8
         self.crear_cultivo()
 
     def crear_cultivo(self, sensor=sens):
