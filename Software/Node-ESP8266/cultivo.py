@@ -1,12 +1,12 @@
 from config import sens
-from config import topico
 from DHT22 import DHT22
 import time
 
 class cultivo():
 
-    def __init__(self,debug):
+    def __init__(self,debug,mqtt):
         super(cultivo, self).__init__()
+        self.mqtt=mqtt
         self.debug=debug
         self.sensores={}
         self.data={}
@@ -25,7 +25,10 @@ class cultivo():
         for i in sens:
             self.data[i]=self.sensores[i].readData()
             time.sleep_ms(500)
-        self.debug.print(self.data)
+        self.debug.printDebug(self.data)
 
     def send_data(self):
-        pass
+        for i in sens:
+            for n,m in self.data[i].items():
+                self.mqtt.send(n,m)
+                #self.debug.printDebug(n)

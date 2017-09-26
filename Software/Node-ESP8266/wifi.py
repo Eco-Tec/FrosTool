@@ -36,12 +36,6 @@ class WIFI():
             time.sleep_ms(5000)
             self.event(self.status())
 
-            # self.connect()
-        # elif a==2:
-        #    print(str(self.estado[a]))
-        # else:
-        #    print(str(self.estado[a]))
-            #print("Error desconocido")
 
     def disconnect(self):
         """Termina una conexión existente y deja
@@ -62,12 +56,3 @@ class WIFI():
         self.debug.printDebug({'network config:', self.sta_if.ifconfig()})
         self.debug.printDebug(str(self.estado[self.sta_if.status()]))
         return(self.sta_if.status())
-
-#    def debugMode(self, mode=0):
-#        "Activa/Desactiva El debug visual y de consola serial, On:1 | Off:0"
-#        self.debug_mode = mode
-#        import esp
-#        if self.debug_mode == 1:
-#            esp.osdebug(0)  # redirect vendor O/S debugging messages to UART(0)
-#        else:
-#            esp.osdebug(None)

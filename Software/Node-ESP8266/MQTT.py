@@ -3,6 +3,7 @@ from umqtt.simple import MQTTClient
 from ubinascii import hexlify
 from machine import unique_id
 from config import BROKER
+from config import topico
 
 
 class MQTT():
@@ -36,10 +37,10 @@ class MQTT():
         "Envio Datos mediante el protocolo MQTT"
         try:
             self.connect()
-            self.client_mqtt.publish(topic, str(data))
+            self.client_mqtt.publish(topico+topic, str(data))
             self.disconnect()
             time.sleep_ms(200)
-            self.debug.printDebug({"Enviado dato ....", topic, data})
+            self.debug.printDebug({"Enviado dato ....", topico+topic, data})
         except Exception as e:
             self.disconnect()
             self.debug.printDebug({"Fallo el envio de datos MQTT .....", e})
@@ -47,16 +48,3 @@ class MQTT():
     def receive(self):
         "Metodo que recibe datos enviados a traves del protocolo MQTT"
         pass
-
-#    def debugMode(self, mode=0):
-#        "Activa/Desactiva El debug visual y de consola serial, On:1 | Off:0"
-#        import esp
-#        import machine
-#        self.debug_mode = mode
-#        if self.debug_mode == 1:
-#            esp.osdebug(0)  # redirect vendor O/S debugging messages to UART(0)
-#            self.pin_led_debug = machine.Pin(2, machine.Pin.OUT)  # Debug visual
-#            self.client_mqtt.DEBUG = True
-#        else:
-#            esp.osdebug(None)
-#            self.client_mqtt.DEBUG = False
