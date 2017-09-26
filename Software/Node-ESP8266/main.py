@@ -16,18 +16,18 @@
 """
 
 from config import TOPIC1, TOPIC2
-from sensores import DHT22
+from DHT22 import DHT22
 from MQTT import MQTT
 from wifi import WIFI
 from debug import debug_mode
 
 
 if __name__ == '__main__':
-    debug=debug_mode(False)
+    debug=debug_mode(True)
     mqtt = MQTT(debug)
     wifi = WIFI(debug)
-    sensor1 = DHT22(pin_dht=4)
-    wifi.connect()
-    temperatura, humedad = sensor1.readData()
-    mqtt.send(TOPIC1, temperatura)
-    mqtt.send(TOPIC2, humedad)
+    sensor1 = DHT22(debug,"DHT22",4)
+    #wifi.connect()
+    print(sensor1.readData())
+    #mqtt.send(TOPIC1, temperatura)
+    #mqtt.send(TOPIC2, humedad)
