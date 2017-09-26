@@ -9,9 +9,9 @@ class MQTT():
     """Clase para gestionar la transmición y Recepcion de datos
        usando el protocolo MQTT"""
 
-    def __init__(self,debug):
+    def __init__(self, debug):
         super(MQTT, self).__init__()
-        self.debug=debug
+        self.debug = debug
         self.CLIENT_ID = hexlify(unique_id())
         self.client_mqtt = MQTTClient(self.CLIENT_ID, BROKER)
         self.debug_mode = 1  # Debug On:1 | Off:0
@@ -20,17 +20,17 @@ class MQTT():
         "Metodo que realiza la Conexion al protocolo MQTT"
         try:
             self.client_mqtt.connect()
-            self.debug.print("Conectando al servidor ....")
+            self.debug.printDebug("Conectando al servidor ....")
         except Exception as e:
-            self.debug.print({"Servidor no disponble ....", e})
+            self.debug.printDebug({"Servidor no disponble ....", e})
 
     def disconnect(self):
         "Metodo que realiza la Desconexion al protocolo MQTT"
         try:
             self.client_mqtt.disconnect()
-            self.debug.print("Desconectado del servidor .....")
+            self.debug.printDebug("Desconectado del servidor .....")
         except Exception as e:
-            self.debug.print({"Conexion no disponble .....",e})
+            self.debug.printDebug({"Conexion no disponble .....", e})
 
     def send(self, topic, data):
         "Envio Datos mediante el protocolo MQTT"
@@ -39,10 +39,10 @@ class MQTT():
             self.client_mqtt.publish(topic, str(data))
             self.disconnect()
             time.sleep_ms(200)
-            self.debug.print({"Enviado dato ....", topic, data})
+            self.debug.printDebug({"Enviado dato ....", topic, data})
         except Exception as e:
             self.disconnect()
-            self.debug.print({"Fallo el envio de datos MQTT .....", e})
+            self.debug.printDebug({"Fallo el envio de datos MQTT .....", e})
 
     def receive(self):
         "Metodo que recibe datos enviados a traves del protocolo MQTT"

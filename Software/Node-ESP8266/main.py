@@ -23,6 +23,7 @@ from debug import debug_mode
 
 
 if __name__ == '__main__':
+<<<<<<< HEAD
     debug=debug_mode(True)
     #mqtt = MQTT(debug)
     #wifi = WIFI(debug)
@@ -32,5 +33,13 @@ if __name__ == '__main__':
     #sensor1 = DHT22(debug,"DHT22",4)
 
     #print(sensor1.readData())
+=======
+    debug = debug_mode(True)
+    mqtt = MQTT(debug)
+    wifi = WIFI(debug)
+    sensor1 = DHT22(debug, "DHT22", 4)
+    # wifi.connect()
+    print(sensor1.readData())
+>>>>>>> c808205e1b9b8887ca523e2693a3a74856aa4cb5
     #mqtt.send(TOPIC1, temperatura)
     #mqtt.send(TOPIC2, humedad)

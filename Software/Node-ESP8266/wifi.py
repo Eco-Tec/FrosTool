@@ -6,7 +6,7 @@ from config import SSID, PASSWORD
 class WIFI():
     """Clase para conexion y desconexion del modulo de la red wifi"""
 
-    def __init__(self,debug):
+    def __init__(self, debug):
         super(WIFI, self).__init__()
         self.debug = debug
         self.estado = {0: 'no connection and no activity', 1: 'connecting in progress',
@@ -14,17 +14,16 @@ class WIFI():
                        4: 'failed due to other problems', 5: 'connection successful', 255: ""}
         self.sta_if = network.WLAN(network.STA_IF)
         # self.ap_if =WLAN(network.AP_IF)
-        self.intentos=0
+        self.intentos = 0
         self.disconnect()
         self.sta_if.active(False)
-
 
     def connect(self, name=SSID, passw=PASSWORD):
         """Establece la conexión, recibe el nombre
            y clave de la red """
         if not self.sta_if.isconnected():
-            self.intentos=0
-            self.debug.print('Connecting to network...')
+            self.intentos = 0
+            self.debug.printDebug('Connecting to network...')
             self.sta_if.active(True)
             self.sta_if.connect(name, passw)
             time.sleep_ms(5000)
@@ -32,8 +31,8 @@ class WIFI():
 
     def event(self, a):
         """Se encarga del numero de intentos para realziar la reconexion"""
-        self.intentos=self.intentos+1
-        if a == 1 and self.intentos<6:
+        self.intentos = self.intentos + 1
+        if a == 1 and self.intentos < 6:
             time.sleep_ms(5000)
             self.event(self.status())
 
@@ -54,14 +53,14 @@ class WIFI():
                 time.sleep_ms(1000)
             except Exception as e:
                 self.event(self.status())
-                self.debug.print("Desconectado de la Red...")
+                self.debug.printDebugDebug("Desconectado de la Red...")
 
     def status(self):
         """Determina el estado de la conexion y las posibles
            causas de errores"""
-        self.debug.print("Estado de conexion ....")
-        self.debug.print({'network config:', self.sta_if.ifconfig()})
-        self.debug.print(str(self.estado[self.sta_if.status()]))
+        self.debug.printDebug("Estado de conexion ....")
+        self.debug.printDebug({'network config:', self.sta_if.ifconfig()})
+        self.debug.printDebug(str(self.estado[self.sta_if.status()]))
         return(self.sta_if.status())
 
 #    def debugMode(self, mode=0):
