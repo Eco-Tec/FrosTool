@@ -31,3 +31,4 @@ if __name__ == '__main__':
     while(1):
         cultivo.read_sensores()
         cultivo.send_data()
+        sleep_ms(800)

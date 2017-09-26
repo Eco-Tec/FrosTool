@@ -12,15 +12,15 @@ class debug_mode():
 
     def active(self):
         """Activa / Desactiva El debug visual y de consola serial(UART0)"""
-        esp.osdebug(False)
-        #self.client_mqtt.DEBUG = False
+        esp.osdebug(0)
+        #self.client_mqtt.DEBUG = True
         print("Modo debug activado ...")
 
     def desactive(self):
         """Desactive debug"""
         print("Modo debug desactivado ....")
-        esp.osdebug(0)
-        #self.client_mqtt.DEBUG = True
+        esp.osdebug(None)
+        #self.client_mqtt.DEBUG = false
 
     def printDebug(self, msm):
         """Envia mensajes por debug si esta activado"""

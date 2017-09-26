@@ -1,9 +1,9 @@
-import time
 from umqtt.simple import MQTTClient
 from ubinascii import hexlify
 from machine import unique_id
 from config import BROKER
 from config import topico
+from time import sleep_ms
 
 
 class MQTT():
@@ -37,10 +37,10 @@ class MQTT():
         "Envio Datos mediante el protocolo MQTT"
         try:
             self.connect()
-            self.client_mqtt.publish(topico+topic, str(data))
+            self.client_mqtt.publish(topico + topic, str(data))
             self.disconnect()
-            time.sleep_ms(200)
-            self.debug.printDebug({"Enviado dato ....", topico+topic, data})
+            self.debug.printDebug({"Enviado dato ....", topico + topic, data})
+            sleep_ms(200)
         except Exception as e:
             self.disconnect()
             self.debug.printDebug({"Fallo el envio de datos MQTT .....", e})

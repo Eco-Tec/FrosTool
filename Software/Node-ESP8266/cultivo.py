@@ -1,6 +1,6 @@
 from config import sensor_list
 from DHT22 import DHT22
-import time
+from time import sleep_ms
 
 
 class Cultivo():
@@ -29,7 +29,6 @@ class Cultivo():
         "Realzia la lectura de las variables fisicas de los diferentes tipos de sensores"
         for sensor in sensor_list:
             self.data[sensor] = self.sensores[sensor].readData()
-            time.sleep_ms(500)
         self.debug.printDebug(self.data)
 
     def send_data(self):
