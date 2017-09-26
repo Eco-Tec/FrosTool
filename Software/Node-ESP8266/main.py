@@ -23,7 +23,7 @@ from debug import debug_mode
 
 
 if __name__ == '__main__':
-    debug=debug_mode(False)
+    debug = debug_mode(True)
     mqtt = MQTT(debug)
     wifi = WIFI(debug)
     sensor1 = DHT22(pin_dht=4)
