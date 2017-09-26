@@ -1,7 +1,6 @@
 ﻿CONFIG = b""
-<<<<<<< HEAD
-PASSWORD = "52691729"
+PASSWORD = "my_password"
 BROKER = "192.168.0.16"
-SSID = "FAMILIA MONSALVE"
+SSID = "my_red"
 topico = "/cultivo/"
 sens={"sensor 1":"DHT22","sensor 2":"DHT22","sensor 3":"DHT22"}
