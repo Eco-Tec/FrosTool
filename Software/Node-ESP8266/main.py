@@ -15,8 +15,8 @@
 
 """
 
-#from config import TOPIC1, TOPIC2
-from cultivo import cultivo
+from config import TOPIC1, TOPIC2
+from DHT22 import DHT22
 from MQTT import MQTT
 from wifi import WIFI
 from debug import debug_mode
