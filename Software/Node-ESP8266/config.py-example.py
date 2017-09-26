@@ -7,4 +7,5 @@ TOPIC2 = b"/cultivo/hum"
 TOPIC3 = b"/sensor1/set/temp"
 TOPIC4 = b"/sensor1/set/hum"
 TOPIC5 = b"/sensor1/alarma"
-sensores = {"sensor 1": "DHT22"}
+topico = "/cultivo/temp"
+sens = {"sensor 1": "DHT22", "sensor 2": "DHT22", "sensor 3": "DHT22"}

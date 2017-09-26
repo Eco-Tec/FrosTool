@@ -15,19 +15,31 @@
 
 """
 
-from config import TOPIC1, TOPIC2
-from DHT22 import DHT22
+#from config import TOPIC1, TOPIC2
+from cultivo import cultivo
 from MQTT import MQTT
 from wifi import WIFI
 from debug import debug_mode
 
 
 if __name__ == '__main__':
+<<<<<<< HEAD
+    debug=debug_mode(True)
+    #mqtt = MQTT(debug)
+    #wifi = WIFI(debug)
+    #wifi.connect()
+    cultivo=cultivo(debug)
+    cultivo.read_sensores()
+    #sensor1 = DHT22(debug,"DHT22",4)
+
+    #print(sensor1.readData())
+=======
     debug = debug_mode(True)
     mqtt = MQTT(debug)
     wifi = WIFI(debug)
     sensor1 = DHT22(debug, "DHT22", 4)
     # wifi.connect()
     print(sensor1.readData())
+>>>>>>> c808205e1b9b8887ca523e2693a3a74856aa4cb5
     #mqtt.send(TOPIC1, temperatura)
     #mqtt.send(TOPIC2, humedad)
