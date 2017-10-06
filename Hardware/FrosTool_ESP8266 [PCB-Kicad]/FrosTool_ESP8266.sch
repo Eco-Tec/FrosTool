@@ -28,9 +28,8 @@ LIBS:opto
 LIBS:atmel
 LIBS:contrib
 LIBS:valves
-LIBS:ESP8266
 LIBS:FrosTool_ESP8266-cache
-EELAYER 25 0
+EELAYER 26 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
@@ -53,32 +52,6 @@ F 1 "ESP-12E" H 5100 3750 50  0000 C CNN
 F 2 "" H 5100 3650 50  0001 C CNN
 F 3 "" H 5100 3650 50  0001 C CNN
 	1    5100 3650
-	1    0    0    -1  
-$EndComp
-$Comp
-L Conn_01x02 J?
-U 1 1 59CD2DCE
-P 1400 1600
-F 0 "J?" H 1400 1700 50  0000 C CNN
-F 1 "Power_IN" V 1550 1550 50  0000 C CNN
-F 2 "" H 1400 1600 50  0001 C CNN
-F 3 "" H 1400 1600 50  0001 C CNN
-	1    1400 1600
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	4200 4050 4100 4050
-Wire Wire Line
-	6100 4050 6000 4050
-$Comp
-L Conn_01x02 J?
-U 1 1 59D3F8FA
-P 6700 3350
-F 0 "J?" H 6700 3450 50  0000 C CNN
-F 1 "UART" H 6700 3150 50  0000 C CNN
-F 2 "" H 6700 3350 50  0001 C CNN
-F 3 "" H 6700 3350 50  0001 C CNN
-	1    6700 3350
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -114,25 +87,8 @@ F 3 "" H 8750 3500 50  0001 C CNN
 	1    8750 3500
 	0    -1   -1   0   
 $EndComp
-Wire Wire Line
-	8850 3800 8850 3700
-Wire Wire Line
-	8750 3700 8750 3800
 Text Notes 8450 3200 0    60   ~ 0
 SENSOR 1
-$Comp
-L Conn_01x01 J?
-U 1 1 59D43AC7
-P 6700 3850
-F 0 "J?" H 6700 3950 50  0000 C CNN
-F 1 "Debug" H 6700 3750 50  0000 C CNN
-F 2 "" H 6700 3850 50  0001 C CNN
-F 3 "" H 6700 3850 50  0001 C CNN
-	1    6700 3850
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	6500 3850 6000 3850
 $Comp
 L C_Small C?
 U 1 1 59D43D7C
@@ -144,34 +100,6 @@ F 3 "" H 2350 1500 50  0001 C CNN
 	1    2350 1500
 	1    0    0    -1  
 $EndComp
-$Comp
-L PWR_FLAG #FLG?
-U 1 1 59D43E98
-P 1600 1850
-F 0 "#FLG?" H 1600 1925 50  0001 C CNN
-F 1 "PWR_FLAG" H 1700 2000 50  0000 C CNN
-F 2 "" H 1600 1850 50  0001 C CNN
-F 3 "" H 1600 1850 50  0001 C CNN
-	1    1600 1850
-	-1   0    0    1   
-$EndComp
-$Comp
-L PWR_FLAG #FLG?
-U 1 1 59D4416A
-P 1600 1250
-F 0 "#FLG?" H 1600 1325 50  0001 C CNN
-F 1 "PWR_FLAG" H 1500 1400 50  0000 C CNN
-F 2 "" H 1600 1250 50  0001 C CNN
-F 3 "" H 1600 1250 50  0001 C CNN
-	1    1600 1250
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	2350 1600 2350 1700
-Wire Wire Line
-	1600 1700 4100 1700
-Wire Wire Line
-	3250 1700 3250 1800
 $Comp
 L GND #PWR?
 U 1 1 59D446AA
@@ -205,8 +133,6 @@ F 3 "" H 6100 4050 50  0001 C CNN
 	1    6100 4050
 	0    -1   -1   0   
 $EndComp
-Connection ~ 2350 1700
-Connection ~ 1600 1700
 $Comp
 L CP C?
 U 1 1 59D44B80
@@ -218,10 +144,6 @@ F 3 "" H 4100 1550 50  0001 C CNN
 	1    4100 1550
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	3550 1400 4700 1400
-Connection ~ 4100 1400
-Connection ~ 3250 1700
 $Comp
 L +3.3V #PWR?
 U 1 1 59D44DD9
@@ -233,14 +155,6 @@ F 3 "" H 4700 1400 50  0001 C CNN
 	1    4700 1400
 	0    1    1    0   
 $EndComp
-Wire Wire Line
-	1600 1400 2950 1400
-Connection ~ 2350 1400
-Wire Wire Line
-	1600 1600 1600 1850
-Wire Wire Line
-	1600 1250 1600 1500
-Connection ~ 1600 1400
 $Comp
 L +3.3V #PWR?
 U 1 1 59D45AA6
@@ -252,10 +166,6 @@ F 3 "" H 8900 3800 50  0001 C CNN
 	1    8900 3800
 	-1   0    0    1   
 $EndComp
-Wire Wire Line
-	8750 3800 8700 3800
-Wire Wire Line
-	8850 3800 8900 3800
 $Comp
 L +3.3V #PWR?
 U 1 1 59D45D80
@@ -267,32 +177,10 @@ F 3 "" H 4100 4050 50  0001 C CNN
 	1    4100 4050
 	0    -1   -1   0   
 $EndComp
-Wire Wire Line
-	6000 3350 6500 3350
-Wire Wire Line
-	6000 3450 6500 3450
-Wire Notes Line
-	8150 3250 8150 3750
-Wire Notes Line
-	8150 3250 9150 3250
-Wire Notes Line
-	9150 3250 9150 3750
-Wire Notes Line
-	9150 3750 8150 3750
 Text Label 8100 3500 2    60   ~ 0
 DATA_S1
 Text Label 6050 3550 0    60   ~ 0
 DATA_S1
-Wire Wire Line
-	6050 3550 6000 3550
-Wire Notes Line
-	1150 950  5000 950 
-Wire Notes Line
-	5000 950  5000 2200
-Wire Notes Line
-	5000 2200 1150 2200
-Wire Notes Line
-	1150 2200 1150 950 
 Text Notes 2250 850  0    60   ~ 0
 POWER IN [Vin: 5.3V -> Vout 3.3V]
 $Comp
@@ -317,10 +205,6 @@ F 3 "" H 8750 4550 50  0001 C CNN
 	1    8750 4550
 	0    -1   -1   0   
 $EndComp
-Wire Wire Line
-	8850 4850 8850 4750
-Wire Wire Line
-	8750 4750 8750 4850
 Text Notes 8450 4250 0    60   ~ 0
 SENSOR 2
 $Comp
@@ -345,38 +229,13 @@ F 3 "" H 8900 4850 50  0001 C CNN
 	1    8900 4850
 	-1   0    0    1   
 $EndComp
-Wire Wire Line
-	8750 4850 8700 4850
-Wire Wire Line
-	8850 4850 8900 4850
-Wire Notes Line
-	8150 4300 8150 4800
-Wire Notes Line
-	8150 4300 9150 4300
-Wire Notes Line
-	9150 4300 9150 4800
-Wire Notes Line
-	9150 4800 8150 4800
 Text Label 8100 4550 2    60   ~ 0
 DATA_S2
-Wire Notes Line
-	850  6350 5450 6350
-Wire Notes Line
-	5450 6350 5450 7600
-Wire Notes Line
-	5450 7600 850  7600
-Wire Notes Line
-	850  7600 850  6350
 Text Notes 950  6300 0    60   ~ 0
 TODO
 Text Notes 1000 7050 0    60   ~ 0
 GPIO16 -> Deep-sleep mode
-Wire Wire Line
-	6050 3750 6000 3750
-Wire Wire Line
-	1850 1250 1850 1400
-Connection ~ 1850 1400
-Text Label 1850 1250 0    60   ~ 0
+Text Label 2350 1250 0    60   ~ 0
 BAT+
 Text Notes 1000 6550 0    60   ~ 0
 ADC -> GPIO4
@@ -391,47 +250,29 @@ F 3 "" H 4100 3550 50  0001 C CNN
 	1    4100 3550
 	0    -1   -1   0   
 $EndComp
-Wire Wire Line
-	4200 3550 4100 3550
 Text Label 6050 3650 0    60   ~ 0
 ADC_BAT
-Wire Wire Line
-	6050 3650 6000 3650
-Text Label 2700 3700 0    60   ~ 0
+Text Label 2750 5300 0    60   ~ 0
 ADC_BAT
-Wire Wire Line
-	2700 3700 2600 3700
 Text Label 6050 3750 0    60   ~ 0
 DATA_S2
-Text Label 1100 3700 2    60   ~ 0
+Text Label 1150 5300 2    60   ~ 0
 BAT+
-Wire Wire Line
-	1100 3700 1350 3700
 $Comp
 L GND #PWR?
 U 1 1 59D49172
-P 2050 3850
-F 0 "#PWR?" H 2050 3600 50  0001 C CNN
-F 1 "GND" H 2050 3700 50  0000 C CNN
-F 2 "" H 2050 3850 50  0001 C CNN
-F 3 "" H 2050 3850 50  0001 C CNN
-	1    2050 3850
+P 2100 5450
+F 0 "#PWR?" H 2100 5200 50  0001 C CNN
+F 1 "GND" H 2100 5300 50  0000 C CNN
+F 2 "" H 2100 5450 50  0001 C CNN
+F 3 "" H 2100 5450 50  0001 C CNN
+	1    2100 5450
 	1    0    0    -1  
 $EndComp
-Wire Notes Line
-	1150 3450 1150 3800
-Wire Notes Line
-	1150 3800 2650 3800
-Wire Notes Line
-	2650 3800 2650 3450
-Wire Notes Line
-	2650 3450 1150 3450
-Text Notes 1500 3400 0    60   ~ 0
+Text Notes 1550 5000 0    60   ~ 0
 VOLATGE DIVISOR
 Text Notes 1000 7250 0    60   ~ 0
 SENSOR ANALOG -> GPIO
-Wire Notes Line
-	1000 6950 1150 6950
 Text Notes 1000 6650 0    60   ~ 0
 MODO PROGRAMACION
 NoConn ~ 4200 3450
@@ -446,4 +287,418 @@ NoConn ~ 5050 4550
 NoConn ~ 5150 4550
 NoConn ~ 5250 4550
 NoConn ~ 5350 4550
+$Comp
+L USB_OTG J?
+U 1 1 59D7F39A
+P 6350 1550
+F 0 "J?" H 6405 2017 50  0000 C CNN
+F 1 "USB_OTG" H 6405 1926 50  0000 C CNN
+F 2 "" H 6500 1500 50  0001 C CNN
+F 3 "" H 6500 1500 50  0001 C CNN
+	1    6350 1550
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 59D7F4E3
+P 6350 2100
+F 0 "#PWR?" H 6350 1850 50  0001 C CNN
+F 1 "GND" H 6355 1927 50  0000 C CNN
+F 2 "" H 6350 2100 50  0001 C CNN
+F 3 "" H 6350 2100 50  0001 C CNN
+	1    6350 2100
+	1    0    0    -1  
+$EndComp
+Text GLabel 6950 1550 2    60   Input ~ 0
+TXD
+Text GLabel 6950 1650 2    60   Input ~ 0
+RXD
+Text GLabel 6950 1350 2    60   Input ~ 0
+V5
+Text GLabel 6550 3450 2    60   Input ~ 0
+RXD
+Text GLabel 6550 3350 2    60   Input ~ 0
+TXD
+$Comp
+L CONN_01X02 J?
+U 1 1 59D806A2
+P 950 1500
+F 0 "J?" H 869 1225 50  0000 C CNN
+F 1 "IN_PANEL" H 869 1316 50  0000 C CNN
+F 2 "" H 950 1500 50  0001 C CNN
+F 3 "" H 950 1500 50  0001 C CNN
+	1    950  1500
+	-1   0    0    1   
+$EndComp
+Text GLabel 1300 1200 1    60   Input ~ 0
+V5
+$Comp
+L CARGADOR U?
+U 1 1 59D80E61
+P 1650 1550
+F 0 "U?" H 1725 1947 60  0000 C CNN
+F 1 "CARGADOR" H 1725 1841 60  0000 C CNN
+F 2 "" H 1650 1550 60  0001 C CNN
+F 3 "" H 1650 1550 60  0001 C CNN
+	1    1650 1550
+	1    0    0    -1  
+$EndComp
+$Comp
+L CONN_01X02 J?
+U 1 1 59D80F79
+P 2750 1950
+F 0 "J?" H 2828 1991 50  0000 L CNN
+F 1 "BATERIA" H 2828 1900 50  0000 L CNN
+F 2 "" H 2750 1950 50  0001 C CNN
+F 3 "" H 2750 1950 50  0001 C CNN
+	1    2750 1950
+	1    0    0    -1  
+$EndComp
+$Comp
+L 2N3904 Q?
+U 1 1 59D816D3
+P 1300 3900
+F 0 "Q?" H 1491 3946 50  0000 L CNN
+F 1 "2N3904" H 1491 3855 50  0000 L CNN
+F 2 "TO_SOT_Packages_THT:TO-92_Molded_Narrow" H 1500 3825 50  0001 L CIN
+F 3 "" H 1300 3900 50  0001 L CNN
+	1    1300 3900
+	1    0    0    -1  
+$EndComp
+$Comp
+L 2N3904 Q?
+U 1 1 59D817D6
+P 2800 3900
+F 0 "Q?" H 2991 3946 50  0000 L CNN
+F 1 "2N3904" H 2991 3855 50  0000 L CNN
+F 2 "TO_SOT_Packages_THT:TO-92_Molded_Narrow" H 3000 3825 50  0001 L CIN
+F 3 "" H 2800 3900 50  0001 L CNN
+	1    2800 3900
+	1    0    0    -1  
+$EndComp
+Text GLabel 1650 1950 3    60   Input ~ 0
+LED1
+Text GLabel 1850 1950 3    60   Input ~ 0
+LED2
+Wire Wire Line
+	4200 4050 4100 4050
+Wire Wire Line
+	6100 4050 6000 4050
+Wire Wire Line
+	8850 3800 8850 3700
+Wire Wire Line
+	8750 3700 8750 3800
+Wire Wire Line
+	6500 3850 6000 3850
+Wire Wire Line
+	2350 1600 2350 1700
+Wire Wire Line
+	3250 1700 3250 1800
+Connection ~ 2350 1700
+Wire Wire Line
+	3550 1400 4700 1400
+Connection ~ 4100 1400
+Connection ~ 3250 1700
+Connection ~ 2350 1400
+Wire Wire Line
+	8750 3800 8700 3800
+Wire Wire Line
+	8850 3800 8900 3800
+Wire Notes Line
+	8150 3250 8150 3750
+Wire Notes Line
+	8150 3250 9150 3250
+Wire Notes Line
+	9150 3250 9150 3750
+Wire Notes Line
+	9150 3750 8150 3750
+Wire Wire Line
+	6050 3550 6000 3550
+Wire Notes Line
+	1150 950  5000 950 
+Wire Notes Line
+	5000 950  5000 2200
+Wire Notes Line
+	5000 2200 1150 2200
+Wire Notes Line
+	1150 2200 1150 950 
+Wire Wire Line
+	8850 4850 8850 4750
+Wire Wire Line
+	8750 4750 8750 4850
+Wire Wire Line
+	8750 4850 8700 4850
+Wire Wire Line
+	8850 4850 8900 4850
+Wire Notes Line
+	8150 4300 8150 4800
+Wire Notes Line
+	8150 4300 9150 4300
+Wire Notes Line
+	9150 4300 9150 4800
+Wire Notes Line
+	9150 4800 8150 4800
+Wire Notes Line
+	850  6350 5450 6350
+Wire Notes Line
+	5450 6350 5450 7600
+Wire Notes Line
+	5450 7600 850  7600
+Wire Notes Line
+	850  7600 850  6350
+Wire Wire Line
+	6050 3750 6000 3750
+Wire Wire Line
+	4200 3550 4100 3550
+Wire Wire Line
+	6050 3650 6000 3650
+Wire Wire Line
+	2750 5300 2650 5300
+Wire Wire Line
+	1150 5300 1400 5300
+Wire Notes Line
+	1200 5050 1200 5400
+Wire Notes Line
+	1200 5400 2700 5400
+Wire Notes Line
+	2700 5400 2700 5050
+Wire Notes Line
+	2700 5050 1200 5050
+Wire Notes Line
+	1000 6950 1150 6950
+Wire Wire Line
+	6350 2100 6350 1950
+Wire Wire Line
+	6950 1650 6650 1650
+Wire Wire Line
+	6650 1550 6950 1550
+Wire Wire Line
+	6250 1950 6250 2000
+Wire Wire Line
+	6250 2000 6350 2000
+Connection ~ 6350 2000
+Wire Wire Line
+	6950 1350 6650 1350
+Wire Wire Line
+	6550 3350 6000 3350
+Wire Wire Line
+	6550 3450 6000 3450
+Wire Wire Line
+	2100 1400 2950 1400
+Wire Wire Line
+	2100 1650 2100 1700
+Wire Wire Line
+	2100 1700 4100 1700
+Wire Wire Line
+	2350 1250 2350 1400
+Wire Wire Line
+	1150 1450 1150 1400
+Wire Wire Line
+	1150 1400 1350 1400
+Wire Wire Line
+	1350 1650 1150 1650
+Wire Wire Line
+	1150 1650 1150 1550
+Wire Wire Line
+	1300 1200 1300 1400
+Connection ~ 1300 1400
+Wire Wire Line
+	2550 1900 2550 1400
+Connection ~ 2550 1400
+Wire Wire Line
+	2550 2000 2400 2000
+Wire Wire Line
+	2400 2000 2400 1700
+Connection ~ 2400 1700
+Wire Wire Line
+	1850 1950 1850 1800
+Wire Wire Line
+	1650 1800 1650 1950
+$Comp
+L GND #PWR?
+U 1 1 59D81C36
+P 2900 4200
+F 0 "#PWR?" H 2900 3950 50  0001 C CNN
+F 1 "GND" H 2905 4027 50  0000 C CNN
+F 2 "" H 2900 4200 50  0001 C CNN
+F 3 "" H 2900 4200 50  0001 C CNN
+	1    2900 4200
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 59D81CD9
+P 1400 4200
+F 0 "#PWR?" H 1400 3950 50  0001 C CNN
+F 1 "GND" H 1405 4027 50  0000 C CNN
+F 2 "" H 1400 4200 50  0001 C CNN
+F 3 "" H 1400 4200 50  0001 C CNN
+	1    1400 4200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1400 4200 1400 4100
+Wire Wire Line
+	2900 4200 2900 4100
+$Comp
+L LED D?
+U 1 1 59D81E6B
+P 2900 3450
+F 0 "D?" V 2938 3333 50  0000 R CNN
+F 1 "LED" V 2847 3333 50  0000 R CNN
+F 2 "" H 2900 3450 50  0001 C CNN
+F 3 "" H 2900 3450 50  0001 C CNN
+	1    2900 3450
+	0    -1   -1   0   
+$EndComp
+$Comp
+L LED D?
+U 1 1 59D81F6A
+P 1400 3450
+F 0 "D?" V 1438 3333 50  0000 R CNN
+F 1 "LED" V 1347 3333 50  0000 R CNN
+F 2 "" H 1400 3450 50  0001 C CNN
+F 3 "" H 1400 3450 50  0001 C CNN
+	1    1400 3450
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	1400 3700 1400 3600
+Wire Wire Line
+	2900 3600 2900 3700
+$Comp
+L R R?
+U 1 1 59D8213F
+P 1400 3050
+F 0 "R?" H 1470 3096 50  0000 L CNN
+F 1 "R" H 1470 3005 50  0000 L CNN
+F 2 "" V 1330 3050 50  0001 C CNN
+F 3 "" H 1400 3050 50  0001 C CNN
+	1    1400 3050
+	1    0    0    -1  
+$EndComp
+$Comp
+L R R?
+U 1 1 59D821C6
+P 2900 3050
+F 0 "R?" H 2970 3096 50  0000 L CNN
+F 1 "R" H 2970 3005 50  0000 L CNN
+F 2 "" V 2830 3050 50  0001 C CNN
+F 3 "" H 2900 3050 50  0001 C CNN
+	1    2900 3050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2900 3300 2900 3200
+Wire Wire Line
+	1400 3200 1400 3300
+Text GLabel 2900 2800 1    60   Input ~ 0
+BAT+
+Wire Wire Line
+	2900 2800 2900 2900
+Text GLabel 1400 2800 1    60   Input ~ 0
+BAT+
+Wire Wire Line
+	1400 2800 1400 2900
+$Comp
+L R R?
+U 1 1 59D82B55
+P 2450 3900
+F 0 "R?" V 2243 3900 50  0000 C CNN
+F 1 "R" V 2334 3900 50  0000 C CNN
+F 2 "" V 2380 3900 50  0001 C CNN
+F 3 "" H 2450 3900 50  0001 C CNN
+	1    2450 3900
+	0    1    1    0   
+$EndComp
+$Comp
+L R R?
+U 1 1 59D82C41
+P 950 3900
+F 0 "R?" V 743 3900 50  0000 C CNN
+F 1 "R" V 834 3900 50  0000 C CNN
+F 2 "" V 880 3900 50  0001 C CNN
+F 3 "" H 950 3900 50  0001 C CNN
+	1    950  3900
+	0    1    1    0   
+$EndComp
+Text GLabel 2200 3900 0    60   Input ~ 0
+LED2
+Wire Wire Line
+	2200 3900 2300 3900
+Text GLabel 700  3900 0    60   Input ~ 0
+LED1
+Wire Wire Line
+	700  3900 800  3900
+$Comp
+L 2N3904 Q?
+U 1 1 59D831CB
+P 6950 5650
+F 0 "Q?" H 7141 5696 50  0000 L CNN
+F 1 "2N3904" H 7141 5605 50  0000 L CNN
+F 2 "TO_SOT_Packages_THT:TO-92_Molded_Narrow" H 7150 5575 50  0001 L CIN
+F 3 "" H 6950 5650 50  0001 L CNN
+	1    6950 5650
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 59D831D2
+P 7050 5950
+F 0 "#PWR?" H 7050 5700 50  0001 C CNN
+F 1 "GND" H 7055 5777 50  0000 C CNN
+F 2 "" H 7050 5950 50  0001 C CNN
+F 3 "" H 7050 5950 50  0001 C CNN
+	1    7050 5950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7050 5950 7050 5850
+$Comp
+L LED D?
+U 1 1 59D831D9
+P 7050 5200
+F 0 "D?" V 7088 5083 50  0000 R CNN
+F 1 "LED" V 6997 5083 50  0000 R CNN
+F 2 "" H 7050 5200 50  0001 C CNN
+F 3 "" H 7050 5200 50  0001 C CNN
+	1    7050 5200
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	7050 5350 7050 5450
+$Comp
+L R R?
+U 1 1 59D831E1
+P 7050 4800
+F 0 "R?" H 7120 4846 50  0000 L CNN
+F 1 "R" H 7120 4755 50  0000 L CNN
+F 2 "" V 6980 4800 50  0001 C CNN
+F 3 "" H 7050 4800 50  0001 C CNN
+	1    7050 4800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7050 5050 7050 4950
+Text GLabel 7050 4550 1    60   Input ~ 0
+BAT+
+Wire Wire Line
+	7050 4550 7050 4650
+$Comp
+L R R?
+U 1 1 59D831EB
+P 6600 5650
+F 0 "R?" V 6393 5650 50  0000 C CNN
+F 1 "R" V 6484 5650 50  0000 C CNN
+F 2 "" V 6530 5650 50  0001 C CNN
+F 3 "" H 6600 5650 50  0001 C CNN
+	1    6600 5650
+	0    1    1    0   
+$EndComp
+Text GLabel 6350 5650 0    60   Input ~ 0
+CONEXION
+Wire Wire Line
+	6350 5650 6450 5650
+Text GLabel 6500 3850 2    60   Input ~ 0
+CONEXION
 $EndSCHEMATC
