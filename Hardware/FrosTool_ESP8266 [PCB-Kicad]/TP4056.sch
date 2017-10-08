@@ -1,0 +1,248 @@
+EESchema Schematic File Version 2
+LIBS:power
+LIBS:device
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:ESP8266
+LIBS:tp4056
+LIBS:FrosTool_ESP8266-cache
+EELAYER 25 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 2 2
+Title "Linear Li-lon Battery Charger TP4056"
+Date ""
+Rev "1"
+Comp "Eco-Tec"
+Comment1 "@maurinc2010"
+Comment2 "@fandres"
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L TP4056 U?
+U 1 1 59DAA881
+P 3150 2450
+F 0 "U?" H 2800 2850 60  0000 L CNN
+F 1 "TP4056" H 3500 2850 60  0000 R CNN
+F 2 "" H 3150 2450 60  0000 C CNN
+F 3 "" H 3150 2450 60  0000 C CNN
+	1    3150 2450
+	1    0    0    -1  
+$EndComp
+Text GLabel 1150 2200 0    60   Input ~ 0
+IN+
+$Comp
+L R R?
+U 1 1 59DAAB4A
+P 1600 2200
+F 0 "R?" V 1680 2200 50  0000 C CNN
+F 1 "0.4" V 1600 2200 50  0000 C CNN
+F 2 "" V 1530 2200 50  0001 C CNN
+F 3 "" H 1600 2200 50  0001 C CNN
+	1    1600 2200
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	2650 2200 1750 2200
+Wire Wire Line
+	1450 2200 1150 2200
+Wire Wire Line
+	2650 2300 2200 2300
+Wire Wire Line
+	2200 2300 2200 2200
+Connection ~ 2200 2200
+Wire Wire Line
+	3150 2850 3150 3000
+$Comp
+L GND #PWR?
+U 1 1 59DAB02E
+P 2000 1750
+F 0 "#PWR?" H 2000 1500 50  0001 C CNN
+F 1 "GND" H 2000 1600 50  0000 C CNN
+F 2 "" H 2000 1750 50  0001 C CNN
+F 3 "" H 2000 1750 50  0001 C CNN
+	1    2000 1750
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	3650 2500 4250 2500
+$Comp
+L C C?
+U 1 1 59DAB50D
+P 2000 1950
+F 0 "C?" H 2025 2050 50  0000 L CNN
+F 1 "10uF" H 2025 1850 50  0000 L CNN
+F 2 "" H 2038 1800 50  0001 C CNN
+F 3 "" H 2000 1950 50  0001 C CNN
+	1    2000 1950
+	1    0    0    -1  
+$EndComp
+Text Notes 800  6800 0    60   ~ 0
+- Temperature Sense Input: PIN1\n-
+Wire Notes Line
+	6750 6550 6750 7700
+Wire Notes Line
+	6750 7700 700  7700
+Wire Notes Line
+	700  7700 700  6550
+Wire Notes Line
+	700  6550 6750 6550
+Text Notes 900  6450 0    157  ~ 0
+TODO
+$Comp
+L R R?
+U 1 1 59DABBF0
+P 3750 2800
+F 0 "R?" V 3830 2800 50  0000 C CNN
+F 1 "1.2k" V 3750 2800 50  0000 C CNN
+F 2 "" V 3680 2800 50  0001 C CNN
+F 3 "" H 3750 2800 50  0001 C CNN
+	1    3750 2800
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 59DABC8B
+P 3750 3050
+F 0 "#PWR?" H 3750 2800 50  0001 C CNN
+F 1 "GND" H 3750 2900 50  0000 C CNN
+F 2 "" H 3750 3050 50  0001 C CNN
+F 3 "" H 3750 3050 50  0001 C CNN
+	1    3750 3050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3750 2950 3750 3050
+Wire Wire Line
+	3750 2650 3750 2600
+Wire Wire Line
+	3750 2600 3650 2600
+Wire Wire Line
+	3850 2200 3850 2000
+Text GLabel 3850 2000 1    60   Input ~ 0
+BAT+
+Wire Wire Line
+	3650 2200 3900 2200
+$Comp
+L C C?
+U 1 1 59DAC301
+P 4050 2200
+F 0 "C?" H 4075 2300 50  0000 L CNN
+F 1 "10uF" H 4075 2100 50  0000 L CNN
+F 2 "" H 4088 2050 50  0001 C CNN
+F 3 "" H 4050 2200 50  0001 C CNN
+	1    4050 2200
+	0    1    1    0   
+$EndComp
+Connection ~ 3850 2200
+Wire Wire Line
+	4200 2200 4350 2200
+Wire Wire Line
+	4250 2500 4250 2200
+$Comp
+L GND #PWR?
+U 1 1 59DAC4CB
+P 4350 2200
+F 0 "#PWR?" H 4350 1950 50  0001 C CNN
+F 1 "GND" H 4350 2050 50  0000 C CNN
+F 2 "" H 4350 2200 50  0001 C CNN
+F 3 "" H 4350 2200 50  0001 C CNN
+	1    4350 2200
+	0    -1   -1   0   
+$EndComp
+Connection ~ 4250 2200
+Wire Wire Line
+	3150 3000 3750 3000
+Connection ~ 3750 3000
+$Comp
+L R_Small R?
+U 1 1 59DAC9F8
+P 2500 2500
+F 0 "R?" V 2550 2600 50  0000 L CNN
+F 1 "1k" V 2500 2450 50  0000 L CNN
+F 2 "" H 2500 2500 50  0001 C CNN
+F 3 "" H 2500 2500 50  0001 C CNN
+	1    2500 2500
+	0    1    -1   0   
+$EndComp
+Wire Wire Line
+	2650 2500 2600 2500
+$Comp
+L R_Small R?
+U 1 1 59DACB2A
+P 2500 2600
+F 0 "R?" V 2550 2700 50  0000 L CNN
+F 1 "1k" V 2500 2550 50  0000 L CNN
+F 2 "" H 2500 2600 50  0001 C CNN
+F 3 "" H 2500 2600 50  0001 C CNN
+	1    2500 2600
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	2600 2600 2650 2600
+$Comp
+L LED_Small D?
+U 1 1 59DACCBF
+P 2250 2500
+F 0 "D?" H 2300 2500 50  0000 L CNN
+F 1 "CHRG_R" H 2150 2400 50  0000 L CNN
+F 2 "" V 2250 2500 50  0001 C CNN
+F 3 "" V 2250 2500 50  0001 C CNN
+	1    2250 2500
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	2400 2500 2350 2500
+$Comp
+L LED_Small D?
+U 1 1 59DACFE4
+P 2250 2600
+F 0 "D?" H 2300 2600 50  0000 L CNN
+F 1 "STDBY_G" H 2150 2700 50  0000 L CNN
+F 2 "" V 2250 2600 50  0001 C CNN
+F 3 "" V 2250 2600 50  0001 C CNN
+	1    2250 2600
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	2400 2600 2350 2600
+Wire Wire Line
+	2150 2500 2000 2500
+Wire Wire Line
+	2000 2100 2000 2600
+Connection ~ 2000 2200
+Wire Wire Line
+	2000 2600 2150 2600
+Connection ~ 2000 2500
+Wire Wire Line
+	2000 1750 2000 1800
+Text Notes 650  1100 0    394  ~ 79
+TP4056
+$EndSCHEMATC

@@ -2,7 +2,11 @@
 .directory
 # KiCad files 
 *.bak 
+/Hardware/FrosTool_ESP8266 [PCB-Kicad]/*.bak
 # Backup Freecad files
 *.fcstd1
+/3D-Model/Node/*.fcstd1
+/3D-Model/Broker/*.fcstd1
+/3D-Model/*.fcstd1
 # Config ESP8266
 /Software/Node-ESP8266/config.py
