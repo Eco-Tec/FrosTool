@@ -30,6 +30,7 @@ LIBS:contrib
 LIBS:valves
 LIBS:ESP8266
 LIBS:tp4056
+LIBS:switches
 LIBS:FrosTool_ESP8266-cache
 EELAYER 25 0
 EELAYER END

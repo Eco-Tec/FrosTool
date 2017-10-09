@@ -1,4 +1,4 @@
-update=dom 08 oct 2017 12:44:51 -05
+update=dom 08 oct 2017 19:12:33 -05
 version=1
 last_client=kicad
 [pcbnew]
@@ -70,3 +70,4 @@ LibName28=contrib
 LibName29=valves
 LibName30=ESP8266
 LibName31=tp4056
+LibName32=switches
