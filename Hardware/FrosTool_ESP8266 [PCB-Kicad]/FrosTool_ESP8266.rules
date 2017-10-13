@@ -1,0 +1,117 @@
+
+(rules PCB FrosTool_ESP8266
+  (snap_angle 
+    fortyfive_degree
+  )
+  (autoroute_settings
+    (fanout off)
+    (autoroute on)
+    (postroute on)
+    (vias on)
+    (via_costs 50)
+    (plane_via_costs 5)
+    (start_ripup_costs 100)
+    (start_pass_no 2706)
+    (layer_rule F.Cu
+      (active on)
+      (preferred_direction horizontal)
+      (preferred_direction_trace_costs 1.0)
+      (against_preferred_direction_trace_costs 2.0)
+    )
+    (layer_rule B.Cu
+      (active on)
+      (preferred_direction vertical)
+      (preferred_direction_trace_costs 1.0)
+      (against_preferred_direction_trace_costs 2.0)
+    )
+  )
+  (rule
+    (width 254.0)
+    (clear 254.2)
+    (clear 127.0 (type smd_to_turn_gap))
+    (clear 305.0 (type default_POWER))
+    (clear 63.6 (type smd_smd))
+    (clear 305.0 (type smd_POWER))
+    (clear 305.0 (type "kicad_default"_POWER))
+    (clear 305.0 (type POWER_POWER))
+  )
+  (padstack "Via[0-1]_660.4:406.4_um"
+    (shape
+      (circle F.Cu 660.4 0.0 0.0)
+    )
+    (shape
+      (circle B.Cu 660.4 0.0 0.0)
+    )
+    (attach off)
+  )
+  (padstack "Via[0-1]_762:508_um"
+    (shape
+      (circle F.Cu 762.0 0.0 0.0)
+    )
+    (shape
+      (circle B.Cu 762.0 0.0 0.0)
+    )
+    (attach off)
+  )
+  (via 
+    "Via[0-1]_660.4:406.4_um" "Via[0-1]_660.4:406.4_um" default
+  )
+  (via 
+    "Via[0-1]_762:508_um" "Via[0-1]_762:508_um" default
+  )
+  (via 
+    "Via[0-1]_660.4:406.4_um-kicad_default" "Via[0-1]_660.4:406.4_um" "kicad_default"
+  )
+  (via 
+    "Via[0-1]_762:508_um-kicad_default" "Via[0-1]_762:508_um" "kicad_default"
+  )
+  (via 
+    "Via[0-1]_660.4:406.4_um-POWER" "Via[0-1]_660.4:406.4_um" POWER
+  )
+  (via 
+    "Via[0-1]_762:508_um-POWER" "Via[0-1]_762:508_um" POWER
+  )
+  (via_rule
+    default "Via[0-1]_660.4:406.4_um"
+  )
+  (via_rule
+    "kicad_default" "Via[0-1]_660.4:406.4_um-kicad_default"
+  )
+  (via_rule
+    POWER "Via[0-1]_762:508_um-POWER"
+  )
+  (class default
+    (clearance_class default)
+    (via_rule default)
+    (rule
+      (width 254.0)
+    )
+    (circuit 
+      (use_layer F.Cu B.Cu)
+    )
+  )
+  (class "kicad_default"
+    BAT+ GND +3V3 "Net-(C3-Pad2)" "Net-(D1-Pad1)" "Net-(D1-Pad2)" "Net-(D2-Pad1)" "Net-(D3-Pad1)"
+    IN+ /TXD /RXD /GPIO4 /GPIO5 /GPIO12 /GPIO13 /GPIO14
+    /GPIO15 "Net-(Q1-Pad2)" "Net-(R1-Pad1)" "Net-(R2-Pad1)" "Net-(R3-Pad2)" "/DEBUG_LED" "Net-(R7-Pad1)" "Net-(R8-Pad1)"
+    "Net-(R9-Pad1)" /ADC "Net-(U2-Pad17)" "Net-(U2-Pad18)" "Net-(U2-Pad19)" "Net-(U2-Pad20)" "Net-(U2-Pad21)" "Net-(U2-Pad22)"
+    (clearance_class "kicad_default")
+    (via_rule kicad_default)
+    (rule
+      (width 254.0)
+    )
+    (circuit 
+      (use_layer F.Cu B.Cu)
+    )
+  )
+  (class POWER
+    (clearance_class POWER)
+    (via_rule POWER)
+    (rule
+      (width 304.8)
+    )
+    (circuit 
+      (use_layer F.Cu B.Cu)
+    )
+  )
+)
