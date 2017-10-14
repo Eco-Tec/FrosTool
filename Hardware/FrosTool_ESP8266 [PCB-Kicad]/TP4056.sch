@@ -31,6 +31,7 @@ LIBS:valves
 LIBS:ESP8266
 LIBS:tp4056
 LIBS:switches
+LIBS:ht7333-1
 LIBS:FrosTool_ESP8266-cache
 EELAYER 25 0
 EELAYER END
@@ -100,7 +101,7 @@ U 1 1 59DAB50D
 P 2000 1950
 F 0 "C3" H 2025 2050 50  0000 L CNN
 F 1 "10uF" H 2025 1850 50  0000 L CNN
-F 2 "Capacitors_SMD:c_elec_3x5.3" H 2038 1800 50  0001 C CNN
+F 2 "Capacitors_SMD:c_elec_4x5.3" H 2038 1800 50  0001 C CNN
 F 3 "" H 2000 1950 50  0001 C CNN
 	1    2000 1950
 	1    0    0    -1  
@@ -248,4 +249,5 @@ Wire Wire Line
 Connection ~ 2000 2200
 Wire Wire Line
 	2650 2650 2650 2600
+NoConn ~ 3200 2850
 $EndSCHEMATC

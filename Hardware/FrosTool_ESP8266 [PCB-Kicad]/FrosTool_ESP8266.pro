@@ -1,4 +1,4 @@
-update=dom 08 oct 2017 19:12:33 -05
+update=vie 13 oct 2017 21:29:31 -05
 version=1
 last_client=kicad
 [pcbnew]
@@ -71,3 +71,4 @@ LibName29=valves
 LibName30=ESP8266
 LibName31=tp4056
 LibName32=switches
+LibName33=Lib/ht7333-1
