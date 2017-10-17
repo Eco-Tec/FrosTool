@@ -227,17 +227,6 @@ F 3 "" H 2450 2000 50  0001 C CNN
 	0    -1   1    0   
 $EndComp
 $Comp
-L 2N3904 Q1
-U 1 1 59D831CB
-P 9200 2450
-F 0 "Q1" H 9391 2496 50  0000 L CNN
-F 1 "2N3904" H 9391 2405 50  0000 L CNN
-F 2 "TO_SOT_Packages_SMD:SOT-23" H 9400 2375 50  0001 L CIN
-F 3 "" H 9200 2450 50  0001 L CNN
-	1    9200 2450
-	1    0    0    -1  
-$EndComp
-$Comp
 L GND #PWR09
 U 1 1 59D831D2
 P 9300 2750
@@ -587,9 +576,9 @@ F 3 "" H 1400 1650 50  0001 C CNN
 	1    1400 1650
 	1    0    0    -1  
 $EndComp
-Text GLabel 1250 1450 2    60   Input ~ 0
+Text GLabel 1350 1450 2    60   Input ~ 0
 IN+
-Text GLabel 2050 1400 0    60   Input ~ 0
+Text GLabel 1900 1450 0    60   Input ~ 0
 BAT+
 Wire Wire Line
 	2350 5350 2250 5350
@@ -662,7 +651,7 @@ Wire Wire Line
 Wire Wire Line
 	1950 3900 1950 4000
 Wire Wire Line
-	1950 4650 1950 4400
+	1950 4400 1950 4650
 Wire Wire Line
 	1750 4050 1750 3900
 Wire Wire Line
@@ -671,7 +660,7 @@ Wire Wire Line
 	1750 4500 1950 4500
 Connection ~ 1950 4500
 Wire Wire Line
-	2350 4650 1950 4650
+	1950 4650 2350 4650
 Wire Wire Line
 	8400 3700 8550 3700
 Wire Wire Line
@@ -747,8 +736,6 @@ Wire Wire Line
 	2550 1800 2500 1800
 Wire Wire Line
 	2050 1400 2950 1400
-Wire Wire Line
-	1250 1450 1200 1450
 $Sheet
 S 1350 1300 550  450 
 U 59DAA3AB
@@ -774,4 +761,21 @@ F 3 "" H 3350 1150 50  0001 C CNN
 	1    3250 1400
 	1    0    0    -1  
 $EndComp
+$Comp
+L BC807 Q1
+U 1 1 59E3AC14
+P 9200 2450
+F 0 "Q1" H 9400 2525 50  0000 L CNN
+F 1 "2N3904" H 9400 2450 50  0000 L CNN
+F 2 "TO_SOT_Packages_SMD:SOT-23" H 9400 2375 50  0001 L CIN
+F 3 "" H 9200 2450 50  0001 L CNN
+	1    9200 2450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1200 1450 1350 1450
+Wire Wire Line
+	1900 1450 2050 1450
+Wire Wire Line
+	2050 1450 2050 1400
 $EndSCHEMATC
