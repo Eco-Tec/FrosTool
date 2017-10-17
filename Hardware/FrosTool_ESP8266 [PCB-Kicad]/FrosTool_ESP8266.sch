@@ -778,4 +778,18 @@ Wire Wire Line
 	1900 1450 2050 1450
 Wire Wire Line
 	2050 1450 2050 1400
+$Comp
+L Conn_01x01 J16
+U 1 1 59E55F20
+P 2150 1150
+F 0 "J16" H 2150 1250 50  0000 C CNN
+F 1 "BAT+" V 2250 1150 50  0000 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x01" H 2150 1150 50  0001 C CNN
+F 3 "" H 2150 1150 50  0001 C CNN
+	1    2150 1150
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	2150 1350 2150 1400
+Connection ~ 2150 1400
 $EndSCHEMATC

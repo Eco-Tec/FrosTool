@@ -1,20 +1,20 @@
 Title,PCB-Kicad FrosTool
 Revision,1
 Date,
-Generated,mié 11 oct 2017 19:48:52 -05
+Generated,lun 16 oct 2017 20:20:48 -05
 Company,Eco-Tec
 Comment 1,@maurinc2010
 Comment 2,@fAndReS
 Comment 3,
 Comment 4,
-Total Parts,37
-Total Unique Parts,27
+Total Parts,38
+Total Unique Parts,28
 
 
 
 Ref,Qty,Value,Footprint,
 C1 ,1,100nF,Capacitors_SMD:C_0805
-C2 C3 ,2,10uF,Capacitors_SMD:c_elec_3x5.3
+C2 C3 ,2,10uF,Capacitors_SMD:c_elec_4x5.3
 C4 ,1,10uF,Capacitors_SMD:C_0805
 D1 ,1,LED_DEBUG,LEDs:LED-3MM
 D2 ,1,CHRG_R,LEDs:LED-3MM
@@ -28,6 +28,7 @@ J10 J11 J12 ,3,V3.3,Pin_Headers:Pin_Header_Straight_1x01
 J3 ,1,TX_RX,Pin_Headers:Pin_Header_Straight_1x02_Pitch2.00mm
 J6 ,1,GPIO12(D/A),Pin_Headers:Pin_Header_Straight_1x01
 J7 J4 J9 ,3,GPIO13(D),Pin_Headers:Pin_Header_Straight_1x01
+J16 ,1,BAT+,
 Q1 ,1,2N3904,TO_SOT_Packages_SMD:SOT-23
 R5 ,1,470,Resistors_SMD:R_1206
 R4 R7 R8 ,3,1k,Resistors_SMD:R_1206
@@ -38,11 +39,11 @@ R9 ,1,1.2k,Resistors_SMD:R_1206
 SW2 ,1,Flash,Buttons_Switches_SMD:SW_SPST_B3U-1000P
 SW1 ,1,Reset,Buttons_Switches_SMD:SW_SPST_B3U-1000P
 U2 ,1,ESP-12E,ESP8266:ESP-12E_SMD
-U1 ,1,AP1117-33,TO_SOT_Packages_SMD:SOT89-3_Housing
+U1 ,1,HT7333-1,TO_SOT_Packages_SMD:SOT89-3_Housing
 U3 ,1,TP4056,Housings_SOIC:SOIC-8_3.9x4.9mm_Pitch1.27mm
 
 
 
 
 BOM made with KICAD_BOM_WIZARD (https://github.com/HashDefineElectronics/KiCad_BOM_Wizard.git)
-Generated mié 11 oct 2017 19:48:52 -05
+Generated lun 16 oct 2017 20:20:48 -05
