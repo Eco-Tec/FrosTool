@@ -23,7 +23,7 @@ from time import sleep_ms
 
 
 if __name__ == '__main__':
-    debug = debug_mode(False)
+    debug = debug_mode(True)
     mqtt = MQTT(debug)
     wifi = WIFI(debug)
     wifi.connect()

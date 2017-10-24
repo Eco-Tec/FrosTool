@@ -23,7 +23,7 @@ class WIFI():
            y clave de la red """
         if not self.sta_if.isconnected():
             self.intentos = 0
-            self.debug.printDebug('Connecting to network...')
+            self.debug.printDebug('Conectando a la Red ...')
             self.sta_if.active(True)
             self.sta_if.connect(name, passw)
             time.sleep_ms(5000)
@@ -38,7 +38,7 @@ class WIFI():
 
     def disconnect(self):
         """Termina una conexión existente y deja
-           disponble el modulo para resivir otra conexion"""
+           disponble el modulo para Recibir otra conexion"""
         if self.sta_if.isconnected():
             try:
                 self.sta_if.disconnect()
@@ -52,6 +52,6 @@ class WIFI():
         """Determina el estado de la conexion y las posibles
            causas de errores"""
         self.debug.printDebug("Estado de conexion ....")
-        self.debug.printDebug({'network config:', self.sta_if.ifconfig()})
+        self.debug.printDebug({'Configuracion de la Red:', self.sta_if.ifconfig()})
         self.debug.printDebug(str(self.estado[self.sta_if.status()]))
         return(self.sta_if.status())

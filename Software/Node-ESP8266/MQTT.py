@@ -21,17 +21,17 @@ class MQTT():
         "Metodo que realiza la Conexion al protocolo MQTT"
         try:
             self.client_mqtt.connect()
-            self.debug.printDebug("Conectando al servidor ....")
+            self.debug.printDebug("Conectando al Broker ....")
         except Exception as e:
-            self.debug.printDebug({"Servidor no disponble ...."})
+            self.debug.printDebug({"Broker no disponble (Address, Service) "})
 
     def disconnect(self):
         "Metodo que realiza la Desconexion al protocolo MQTT"
         try:
             self.client_mqtt.disconnect()
-            self.debug.printDebug("Desconectado del servidor .....")
+            self.debug.printDebug("Desconectado del Broker .....")
         except Exception as e:
-            self.debug.printDebug({"Conexion no disponble ....."})  # , e})
+            self.debug.printDebug({"Conexion MQTT no disponble ....."})  # , e})
 
     def send(self, topic, data):
         "Envio Datos mediante el protocolo MQTT"
