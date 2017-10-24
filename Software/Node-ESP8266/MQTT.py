@@ -23,7 +23,7 @@ class MQTT():
             self.client_mqtt.connect()
             self.debug.printDebug("Conectando al servidor ....")
         except Exception as e:
-            self.debug.printDebug({"Servidor no disponble ....", e})
+            self.debug.printDebug({"Servidor no disponble ...."})
 
     def disconnect(self):
         "Metodo que realiza la Desconexion al protocolo MQTT"
@@ -31,7 +31,7 @@ class MQTT():
             self.client_mqtt.disconnect()
             self.debug.printDebug("Desconectado del servidor .....")
         except Exception as e:
-            self.debug.printDebug({"Conexion no disponble .....", e})
+            self.debug.printDebug({"Conexion no disponble ....."})  # , e})
 
     def send(self, topic, data):
         "Envio Datos mediante el protocolo MQTT"
@@ -43,7 +43,7 @@ class MQTT():
             sleep_ms(200)
         except Exception as e:
             self.disconnect()
-            self.debug.printDebug({"Fallo el envio de datos MQTT .....", e})
+            self.debug.printDebug({"Fallo el envio de datos MQTT ....."})
 
     def receive(self):
         "Metodo que recibe datos enviados a traves del protocolo MQTT"
