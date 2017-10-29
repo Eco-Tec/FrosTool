@@ -21,14 +21,32 @@ from cultivo import Cultivo
 from debug import debug_mode
 from time import sleep_ms
 
+# Globals
+cultivo = None
 
-if __name__ == '__main__':
-    debug = debug_mode(True)
-    mqtt = MQTT(debug)
+
+def setup():
+    "Configura e inicializa el dispositivo"
+    global cultivo
+    debug = debug_mode(False)  # True Or False
     wifi = WIFI(debug)
+    mqtt = MQTT(debug)
     wifi.connect()
     cultivo = Cultivo(debug, mqtt)
+
+
+def loop():
+    "Ciclo principal"
     while(1):
-        cultivo.read_sensores()
-        cultivo.send_data()
-        sleep_ms(800)
+        try:
+            cultivo.read_sensores()
+            cultivo.send_data()
+            sleep_ms(9990)
+        except:
+            import machine
+            machine.reset()
+
+
+if __name__ == '__main__':
+    setup()
+    loop()

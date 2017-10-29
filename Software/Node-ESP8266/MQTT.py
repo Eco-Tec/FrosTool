@@ -3,7 +3,6 @@ from ubinascii import hexlify
 from machine import unique_id
 from config import BROKER
 from config import topico
-from time import sleep_ms
 
 
 class MQTT():
@@ -23,7 +22,7 @@ class MQTT():
             self.client_mqtt.connect()
             self.debug.printDebug("Conectando al Broker ....")
         except Exception as e:
-            self.debug.printDebug({"Broker no disponble (Address, Service) "})
+            self.debug.printDebug({"Broker no disponble (Address, Service). "}, e)
 
     def disconnect(self):
         "Metodo que realiza la Desconexion al protocolo MQTT"
@@ -31,7 +30,7 @@ class MQTT():
             self.client_mqtt.disconnect()
             self.debug.printDebug("Desconectado del Broker .....")
         except Exception as e:
-            self.debug.printDebug({"Conexion MQTT no disponble ....."})  # , e})
+            self.debug.printDebug({"Conexion MQTT no disponble ....."}, e)
 
     def send(self, topic, data):
         "Envio Datos mediante el protocolo MQTT"
@@ -40,10 +39,10 @@ class MQTT():
             self.client_mqtt.publish(topico + topic, str(data))
             self.disconnect()
             self.debug.printDebug({"Enviado dato ....", topico + topic, data})
-            sleep_ms(200)
+            self.debug.visual()
         except Exception as e:
             self.disconnect()
-            self.debug.printDebug({"Fallo el envio de datos MQTT ....."})
+            self.debug.printDebug({"Fallo el envio de datos MQTT ....."}, e)
 
     def receive(self):
         "Metodo que recibe datos enviados a traves del protocolo MQTT"

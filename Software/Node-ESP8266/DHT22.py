@@ -18,8 +18,8 @@ class DHT22():
         try:
             self.s_dht.measure()
             self.debug.printDebug(self.name)
-            self.debug.printDebug(("Temperatura ", self.s_dht.temperature()))
-            self.debug.printDebug(("Humedad  ", self.s_dht.humidity()))
+            self.debug.printDebug(("Temperatura ", self.s_dht.temperature()))  # Debug
+            self.debug.printDebug(("Humedad  ", self.s_dht.humidity()))  # Debug
             return({self.temp: self.s_dht.temperature(), self.hume: self.s_dht.humidity()})
         except Exception as e:
-            self.debug.printDebug(("No fue posible la lectura de Datos error:", e))
+            self.debug.printDebug(("No fue posible la lectura de Datos error:", e))  # Debug

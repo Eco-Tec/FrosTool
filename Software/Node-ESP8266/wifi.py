@@ -15,26 +15,32 @@ class WIFI():
         self.sta_if = network.WLAN(network.STA_IF)
         # self.ap_if =WLAN(network.AP_IF)
         self.intentos = 0
-        self.disconnect()
-        self.sta_if.active(False)
+        self.t_reconect = 10
 
     def connect(self, name=SSID, passw=PASSWORD):
         """Establece la conexión, recibe el nombre
            y clave de la red """
         if not self.sta_if.isconnected():
             self.intentos = 0
-            self.debug.printDebug('Conectando a la Red ...')
             self.sta_if.active(True)
+            self.debug.printDebug('Conectando a la Red ...')
             self.sta_if.connect(name, passw)
-            time.sleep_ms(5000)
             self.event(self.status())
+            self.debug.visual()  # Debug
 
-    def event(self, a):
-        """Se encarga del numero de intentos para realziar la reconexion"""
+    def event(self, intento):
+        """ Rutina de reintento de reconexion,
+            por cada intento duplica el tiempo de espera """
         self.intentos = self.intentos + 1
-        if a == 1 and self.intentos < 6:
-            time.sleep_ms(5000)
-            self.event(self.status())
+        if not self.sta_if.isconnected():
+            if intento == 1 and self.intentos < 25:
+                self.debug.printDebug("Intento de reconección No.", self.intentos)
+                self.t_reconect = self.t_reconect * 2
+                time.sleep_ms(self.t_reconect)
+                self.event(self.status())
+            else:
+                import machine
+                machine.reset()
 
     def disconnect(self):
         """Termina una conexión existente y deja

@@ -1,5 +1,7 @@
 import esp
-from umqtt.simple import MQTTClient
+import machine
+from time import sleep_ms
+#from umqtt.simple import MQTTClient
 
 
 class debug_mode():
@@ -22,18 +24,29 @@ class debug_mode():
         esp.osdebug(None)
         #self.client_mqtt.DEBUG = false
 
-    def printDebug(self, msm):
+    def printDebug(self, msm, info=None):
         """Envia mensajes por debug si esta activado"""
         if self.modo:
-            print(str(msm))
+            print(str(msm), info)
+
+    def visual(self):
+        """Comunica mediante un LED el estado de una acción o fallo """
+        if self.modo:
+            if self.pin_led_debug.value() == 0:
+                self.pin_led_debug.on()  # logica inversa
+            self.pin_led_debug.off()
+            sleep_ms(100)
+            self.pin_led_debug.on()
 
     def set_modo(self, modo):
-        """Cambia el modo de debug"""
+        """Activa/Desactiva el modo de debug"""
         self.modo = modo
         if not modo:
             self.desactive()
         else:
             self.active()
+            self.pin_led_debug = machine.Pin(2, machine.Pin.OUT)  # Debug visual [PIN]
+
 
 #    def debugMode(self, mode=0):
 #        "Activa/Desactiva El debug visual y de consola serial, On:1 | Off:0"

@@ -1,6 +1,5 @@
 from config import sensor_list
 from DHT22 import DHT22
-from time import sleep_ms
 
 
 class Cultivo():
@@ -29,11 +28,12 @@ class Cultivo():
         "Realzia la lectura de las variables fisicas de los diferentes tipos de sensores"
         for sensor in sensor_list:
             self.data[sensor] = self.sensores[sensor].readData()
-        self.debug.printDebug(self.data)
+        self.debug.printDebug(self.data)  # Debug
+        self.debug.visual()  # Debug
 
     def send_data(self):
         "Envia los datos de los diferentes sensores haciendo uso del protocolo MQTT"
         for sensor in sensor_list:
             for topic, data in self.data[sensor].items():
                 self.mqtt.send(topic, data)
-                # self.debug.printDebug(topic)
+                # self.debug.printDebug(topic)  # Debug
