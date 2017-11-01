@@ -39,7 +39,7 @@ class MQTT():
             self.client_mqtt.publish(topico + topic, str(data))
             self.disconnect()
             self.debug.printDebug({"Enviado dato ....", topico + topic, data})
-            self.debug.visual()
+            self.debug.visual()  # Debug
         except Exception as e:
             self.disconnect()
             self.debug.printDebug({"Fallo el envio de datos MQTT ....."}, e)

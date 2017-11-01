@@ -19,34 +19,26 @@ from MQTT import MQTT
 from wifi import WIFI
 from cultivo import Cultivo
 from debug import debug_mode
-from time import sleep_ms
-
-# Globals
-cultivo = None
-
-
-def setup():
-    "Configura e inicializa el dispositivo"
-    global cultivo
-    debug = debug_mode(False)  # True Or False
-    wifi = WIFI(debug)
-    mqtt = MQTT(debug)
-    wifi.connect()
-    cultivo = Cultivo(debug, mqtt)
-
-
-def loop():
-    "Ciclo principal"
-    while(1):
-        try:
-            cultivo.read_sensores()
-            cultivo.send_data()
-            sleep_ms(9990)
-        except:
-            import machine
-            machine.reset()
+import machine
 
 
 if __name__ == '__main__':
-    setup()
-    loop()
+    # configurando RTC.ALARM0
+    rtc = machine.RTC()
+    rtc.irq(trigger=rtc.ALARM0, wake=machine.DEEPSLEEP)
+    # Si el dispositivo desperto de el modo deep sleep
+    if machine.reset_cause() == machine.DEEPSLEEP_RESET:
+        # print('Desperto del modo deep sleep')  # Debug
+        try:
+            debug = debug_mode(False)  # True Or False
+            wifi = WIFI(debug)
+            mqtt = MQTT(debug)
+            wifi.connect()
+            cultivo = Cultivo(debug, mqtt)
+            cultivo.read_sensores()
+            cultivo.send_data()
+        except:
+            import machine
+            machine.reset()
+    rtc.alarm(rtc.ALARM0, 10000)
+    machine.deepsleep()
