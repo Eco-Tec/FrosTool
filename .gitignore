@@ -10,3 +10,4 @@
 /3D-Model/*.fcstd1
 # Config ESP8266
 /Software/Node-ESP8266/config.py
+/Software/BBroker-Orange_Pi/config.py

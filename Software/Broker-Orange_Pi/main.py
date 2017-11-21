@@ -8,11 +8,9 @@
     Distributed under GPLv3+
     Hardware: Orange Pi Zero
     Pin distribution(Default)
-    Pin X     ->  Pin: Alarm(Buzer): [OUT]
-    Pin X     ->  Pin: Stop Alarm(Buzer): [IN]
+    Pin X [BOARD]    ->  Pin: Alarm(Buzer): [OUT]
+    Pin X [BOARD]    ->  Pin: Stop Alarm(Buzer): [IN]
     Configure wifi and MQTT
-    library:
-    https://github.com/eclipse/paho.mqtt.python
 """
 __author__ = "Fabian A. Salamanca F."
 __copyright__ = "Copyright 2017, Eco-Tec"
@@ -22,27 +20,20 @@ __version__ = "3.0"
 __maintainer__ = __author__
 __email__ = "fabian.salamanca@gmail.com"
 
-
-import os
-import sys
-from pyA20.gpio import gpio
-#from pyA20.gpio import connector
-from pyA20.gpio import port
+# imports hardware
+import OPi.GPIO as GPIO
+# imports modulos
+from config import BROKER
+import paho.mqtt.client as mqtt
+import paho.mqtt.subscribe as subscribe
+import paho.mqtt.publish as publish
+# imports library python
 from time import sleep
 
-led = port.PA12
 
-gpio.init()
-gpio.setcfg(led, gpio.OUTPUT)
+if __name__ == '__main__':
 
-try:
-    print ("Press CTRL+C to exit")
-    while True:
-        gpio.output(led, 1)
-	print "led set 1 \r\n"
-        sleep(5)
-        gpio.output(led, 0)
-	print "led set 0 \r\n"
-        sleep(5)
-except KeyboardInterrupt:
-	print ("Goodbye.")
+    try:
+        pass
+    except:
+        pass
