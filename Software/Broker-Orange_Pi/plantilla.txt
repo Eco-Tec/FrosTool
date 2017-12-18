@@ -1,0 +1,9 @@
+# FrosTool by Eco-Tec
+# Copyrigh
+# revision
+# Generado por el Broker
+# fecha
+# SENSOR
+# UBICACION
+
+TIME,var

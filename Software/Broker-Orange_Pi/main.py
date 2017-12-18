@@ -1,10 +1,12 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 """
     DESCRIPCI?N...
     This software is free, licensed y distributed under GPL v3.
     (see COPYING) WITHOUT ANY WARRANTY.
     You can see a description of license here: http://www.gnu.org/copyleft/gpl.html
     Copyright(c) 2017 by fandres "Fabian Salamanca" <fabian.salamanca@openmailbox.org>
+                         Marlon...
     Distributed under GPLv3+
     Hardware: Orange Pi Zero
     Pin distribution(Default)
@@ -14,7 +16,7 @@
 """
 __author__ = "Fabian A. Salamanca F."
 __copyright__ = "Copyright 2017, Eco-Tec"
-__credits__ = ["Fabian A. Salamanca F."]
+__credits__ = ["Fabian A. Salamanca F, Marlon..."]
 __license__ = "GPL"
 __version__ = "3.0"
 __maintainer__ = __author__
@@ -29,17 +31,68 @@ import paho.mqtt.client as mqtt
 from time import sleep
 import threading
 from time import time, sleep
+import time
 import re
 import queue
 
 
+class Archivos ():
+    def __init__(self):
+        self.plantilla = ""  # open("plantilla.txt",'r')
+        self.file = ""
+
+    def crear_file(self, name_file, broker, ubicacion, sensor, var):
+        self.plantilla = open("plantilla.txt", 'r')
+        self.file = open(name_file, 'w')
+        self.encabezado(broker, ubicacion, sensor, var)
+        self.file.close()
+        self.plantilla.close()
+
+    def encabezado(self, broker, ubicacion, sensor, var):
+        linea = self.plantilla.readline()
+        while linea != "":
+
+            if linea == "# Copyrigh\n":
+                #m=re.sub("\s", __copyright__ ,linea)
+                self.file.write("# " + __copyright__ + "\n")
+            elif linea == "# revision\n":
+                # print("# "+__copyright__+"\n")
+                m = re.sub("\n", " " + __version__ + "\n", linea)
+                print(m)
+                self.file.write(m)
+            elif linea == "# Generado por el Broker\n":
+                m = re.sub("\n", broker + "\n", linea)
+                print(m)
+                self.file.write(m)
+            elif linea == "# fecha\n":
+                m = re.sub("\n", " "+time.strftime("%d/%m/%y") + "\n", linea)
+                print(m)
+                self.file.write(m)
+            elif linea == "# UBICACION\n":
+                m = re.sub("\n", " "+ubicacion+ "\n", linea)
+                print(m)
+                self.file.write(m)
+            elif linea == "# SENSOR\n":
+                m = re.sub("\n"," "+ sensor+ "\n", linea)
+                print(m)
+                self.file.write(m)
+            elif linea == "TIME,var\n":
+                m = re.sub("var", var+ "\n", linea)
+            else:
+                print(linea)
+                self.file.write(linea)
+            linea = self.plantilla.readline()
+
 ##########----------    Class   ----------##########
+
+
 class SaveData (object):
     """ Clase que almacena los datos de los diferentes sensores
     para cada sensor, esta clase se debe instanciar."""
 
     def __init__(self, ruta):
         """Se define el nombre del archivo para cada sensor"""
+        self.csv = Archivos()
         #self.name_topic = str(sensor)
         #self.data = data
         #self.time = time
@@ -53,23 +106,25 @@ class SaveData (object):
         self.ruta = str(ruta)
         # self.crear_archivos()
 
-    def add_file(self, name):
+    def add_file(self, name, var):
         """Crea un archivo nuevo y lo agrega al diccionario """
-        self.archivos[name] = self.ruta + str(name) + ".txt"
+        self.archivos[name] = self.ruta + str(name)+"_"+ time.strftime("%d_%m_%y")+"_"+ var + ".csv"
 
     def add_dato(self, dato):
         """"Guarda un nuevo dato, si el archivo no existe lo creea"""
-        print(dato)
         if dato[1] in self.archivos:
             a = open(self.archivos[dato[1]], 'a')
             a.write(dato[3] + "\n")
             a.close()
         else:
             # crea un nuevo archivo y guarda el dato
-            self.add_file(dato[1])
-            a = open(self.archivos[dato[1]], 'w')
-            a.write(dato[3] + "\n")
-            a.close()
+            broker='1'
+            ubicacion="12°12°12"
+            self.add_file(dato[1],dato[2])
+            self.csv.crear_file(self.archivos[dato[1]], broker, ubicacion, dato[1], dato[2] )
+            #a = open(self.archivos[dato[1]], 'a')
+            #a.write(dato[3] + "\n")
+            # a.close()
 
 
 ##########----------    Class   ----------##########
@@ -155,7 +210,6 @@ class BrokerManager(threading.Thread):
         ##data = {sensor: {msg.topic, str(msg.payload)[2:-1]}}
         self.data.add_dato((lists))
         # self.data.add_dato(msg)
-        print(lists)
 
     def connect(self):
         self.Client.connect(self._ip, self._port, 60)
