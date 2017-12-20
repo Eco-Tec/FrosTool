@@ -22,23 +22,16 @@ from debug import debug_mode
 import machine
 
 
+from bootloader import*
+
 if __name__ == '__main__':
     # configurando RTC.ALARM0
+    boot = bootloader()
     rtc = machine.RTC()
     rtc.irq(trigger=rtc.ALARM0, wake=machine.DEEPSLEEP)
-    # Si el dispositivo desperto de el modo deep sleep
+
     if machine.reset_cause() == machine.DEEPSLEEP_RESET:
-        # print('Desperto del modo deep sleep')  # Debug
-        try:
-            debug = debug_mode(True)  # True Or False
-            wifi = WIFI(debug)
-            mqtt = MQTT(debug)
-            wifi.connect()
-            cultivo = Cultivo(debug, mqtt)
-            cultivo.read_sensores()
-            cultivo.send_data()
-        except:
-            import machine
-            machine.reset()
+        boot.run_boot()
+
     rtc.alarm(rtc.ALARM0, 10000)
     machine.deepsleep()
