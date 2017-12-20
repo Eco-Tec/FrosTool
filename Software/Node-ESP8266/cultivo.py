@@ -35,5 +35,5 @@ class Cultivo():
         "Envia los datos de los diferentes sensores haciendo uso del protocolo MQTT"
         for sensor in sensor_list:
             for topic, data in self.data[sensor].items():
-                self.mqtt.send(topic, data)
+                self.mqtt.send(topic, data, self.data[sensor]["name"])
                 # self.debug.printDebug(topic)  # Debug

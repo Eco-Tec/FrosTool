@@ -65,19 +65,19 @@ class Archivos ():
                 print(m)
                 self.file.write(m)
             elif linea == "# fecha\n":
-                m = re.sub("\n", " "+time.strftime("%d/%m/%y") + "\n", linea)
+                m = re.sub("\n", " " + time.strftime("%d/%m/%y") + "\n", linea)
                 print(m)
                 self.file.write(m)
             elif linea == "# UBICACION\n":
-                m = re.sub("\n", " "+ubicacion+ "\n", linea)
+                m = re.sub("\n", " " + ubicacion + "\n", linea)
                 print(m)
                 self.file.write(m)
             elif linea == "# SENSOR\n":
-                m = re.sub("\n"," "+ sensor+ "\n", linea)
+                m = re.sub("\n", " " + sensor + "\n", linea)
                 print(m)
                 self.file.write(m)
             elif linea == "TIME,var\n":
-                m = re.sub("var", var+ "\n", linea)
+                m = re.sub("var", var + "\n", linea)
             else:
                 print(linea)
                 self.file.write(linea)
@@ -108,7 +108,8 @@ class SaveData (object):
 
     def add_file(self, name, var):
         """Crea un archivo nuevo y lo agrega al diccionario """
-        self.archivos[name] = self.ruta + str(name)+"_"+ time.strftime("%d_%m_%y")+"_"+ var + ".csv"
+        self.archivos[name] = self.ruta + str(name) + "_" + \
+            time.strftime("%d_%m_%y") + "_" + var + ".csv"
 
     def add_dato(self, dato):
         """"Guarda un nuevo dato, si el archivo no existe lo creea"""
@@ -118,10 +119,10 @@ class SaveData (object):
             a.close()
         else:
             # crea un nuevo archivo y guarda el dato
-            broker='1'
-            ubicacion="12°12°12"
-            self.add_file(dato[1],dato[2])
-            self.csv.crear_file(self.archivos[dato[1]], broker, ubicacion, dato[1], dato[2] )
+            broker = '1'
+            ubicacion = "12°12°12"
+            self.add_file(dato[1], dato[2])
+            self.csv.crear_file(self.archivos[dato[1]], broker, ubicacion, dato[1], dato[2])
             #a = open(self.archivos[dato[1]], 'a')
             #a.write(dato[3] + "\n")
             # a.close()
@@ -207,6 +208,7 @@ class BrokerManager(threading.Thread):
                 m = ""
         lists.append(m)
         lists.append(str(msg.payload))
+        msg.
         ##data = {sensor: {msg.topic, str(msg.payload)[2:-1]}}
         self.data.add_dato((lists))
         # self.data.add_dato(msg)

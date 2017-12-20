@@ -32,13 +32,13 @@ class MQTT():
         except Exception as e:
             self.debug.printDebug({"Conexion MQTT no disponble ....."}, e)
 
-    def send(self, topic, data):
+    def send(self, topic, data, sensor):
         "Envio Datos mediante el protocolo MQTT"
         try:
             self.connect()
-            self.client_mqtt.publish(topico + topic, str(data))
+            self.client_mqtt.publish(topic + topico + sensor, str(data))
             self.disconnect()
-            self.debug.printDebug({"Enviado dato ....", topico + topic, data})
+            self.debug.printDebug({"Enviado dato ....", topic + topico, data})
             self.debug.visual()  # Debug
         except Exception as e:
             self.disconnect()
