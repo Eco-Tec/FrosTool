@@ -30,7 +30,7 @@ if __name__ == '__main__':
     if machine.reset_cause() == machine.DEEPSLEEP_RESET:
         # print('Desperto del modo deep sleep')  # Debug
         try:
-            debug = debug_mode(True)  # True Or False
+            debug = debug_mode(False)  # True Or False
             wifi = WIFI(debug)
             mqtt = MQTT(debug)
             wifi.connect()
@@ -40,5 +40,5 @@ if __name__ == '__main__':
         except:
             import machine
             machine.reset()
-    rtc.alarm(rtc.ALARM0, 10000)
+    rtc.alarm(rtc.ALARM0, 30000)
     machine.deepsleep()
