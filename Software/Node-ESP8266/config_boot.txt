@@ -1,0 +1,2 @@
+FIRMWARE = 1.4
+MODE = True

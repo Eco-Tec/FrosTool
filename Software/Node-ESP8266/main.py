@@ -26,11 +26,12 @@ from bootloader import*
 
 if __name__ == '__main__':
     # configurando RTC.ALARM0
-    boot = bootloader()
+    boot = Bootloader()
     rtc = machine.RTC()
     rtc.irq(trigger=rtc.ALARM0, wake=machine.DEEPSLEEP)
 
     if machine.reset_cause() == machine.DEEPSLEEP_RESET:
+        #boot.read_config()
         boot.run_boot()
 
     rtc.alarm(rtc.ALARM0, 10000)

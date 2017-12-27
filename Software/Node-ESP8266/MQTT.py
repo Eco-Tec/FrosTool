@@ -15,6 +15,10 @@ class MQTT():
         self.CLIENT_ID = hexlify(unique_id())
         self.client_mqtt = MQTTClient(self.CLIENT_ID, BROKER)
         self.debug_mode = 1  # Debug On:1 | Off:0
+        self.client_mqtt.set_callback(self.callback)
+
+    def callback(self, topic, msg):
+        print(msg)
 
     def connect(self):
         "Metodo que realiza la Conexion al protocolo MQTT"
@@ -43,6 +47,27 @@ class MQTT():
         except Exception as e:
             self.disconnect()
             self.debug.printDebug({"Fallo el envio de datos MQTT ....."}, e)
+
+    def init_recivir(self):
+        self.connect()
+        #self.mqtt.subcribir("/firmware/key")
+        self.client_mqtt.wait_msg()
+        self.disconnect()
+
+
+    def subcribir(self, topic):
+        self.connect()
+        #self.mqtt.subcribir("/firmware/key")
+        self.client_mqtt.subscribe(topic)
+        self.disconnect()
+
+    def set_callback(self):
+        print("Entro set_callback")
+
+    def send_boot(self, topic, data):
+        self.connect()
+        self.client_mqtt.publish(topic, str(data))
+        self.disconnect()
 
     def receive(self):
         "Metodo que recibe datos enviados a traves del protocolo MQTT"
