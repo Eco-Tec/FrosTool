@@ -1,13 +1,17 @@
 ﻿#Linux directory
 .directory
-# KiCad files 
-*.bak 
+# KiCad files
+*.bak
 /Hardware/FrosTool_ESP8266 [PCB-Kicad]/*.bak
 # Backup Freecad files
-*.fcstd1
+.FCStd1
 /3D-Model/Node/*.fcstd1
 /3D-Model/Broker/*.fcstd1
 /3D-Model/*.fcstd1
+# Design temp
+3D-Model/Node/Nodo_V1.fcstd
+3D-Model/Node/Tubo.fcstd
+
 # Config ESP8266
 /Software/Node-ESP8266/config.py
 /Software/BBroker-Orange_Pi/config.py
@@ -20,6 +24,7 @@
 
 # Linux trash folder which might appear on any partition or disk
 .Trash-*
+.swp
 
 # .nfs files are created when an open file is removed but is still being accessed
 .nfs*

@@ -31,8 +31,38 @@ if __name__ == '__main__':
     rtc.irq(trigger=rtc.ALARM0, wake=machine.DEEPSLEEP)
 
     if machine.reset_cause() == machine.DEEPSLEEP_RESET:
-        #boot.read_config()
+<< << << < HEAD
+        # boot.read_config()
         boot.run_boot()
 
     rtc.alarm(rtc.ALARM0, 10000)
+||||||| merged common ancestors
+        # print('Desperto del modo deep sleep')  # Debug
+        try:
+            debug = debug_mode(True)  # True Or False
+            wifi = WIFI(debug)
+            mqtt = MQTT(debug)
+            wifi.connect()
+            cultivo = Cultivo(debug, mqtt)
+            cultivo.read_sensores()
+            cultivo.send_data()
+        except:
+            import machine
+            machine.reset()
+    rtc.alarm(rtc.ALARM0, 10000)
+=======
+        # print('Desperto del modo deep sleep')  # Debug
+        try:
+            debug = debug_mode(False)  # True Or False
+            wifi = WIFI(debug)
+            mqtt = MQTT(debug)
+            wifi.connect()
+            cultivo = Cultivo(debug, mqtt)
+            cultivo.read_sensores()
+            cultivo.send_data()
+        except:
+            import machine
+            machine.reset()
+    rtc.alarm(rtc.ALARM0, 30000)
+>>>>>>> hotfix1
     machine.deepsleep()
