@@ -50,7 +50,7 @@ class MQTT():
 
     def init_recivir(self):
         self.connect()
-        #self.mqtt.subcribir("/firmware/key")
+        #self.client_mqtt.subscribe("/firmware/key")
         self.client_mqtt.wait_msg()
         self.disconnect()
 
