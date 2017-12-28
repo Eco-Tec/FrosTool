@@ -5,9 +5,8 @@ from MQTT import MQTT
 from wifi import WIFI
 from cultivo import Cultivo
 from debug import debug_mode
-import machine
-
-import socket
+#import machine
+#import socket
 import time
 
 

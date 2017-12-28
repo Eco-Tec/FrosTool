@@ -30,7 +30,7 @@ if __name__ == '__main__':
 
     if machine.reset_cause() == machine.DEEPSLEEP_RESET:
         # boot.read_config()
-        boot.run_boot()
+        boot.run_user()
 
     rtc.alarm(rtc.ALARM0, 30000)
     machine.deepsleep()
