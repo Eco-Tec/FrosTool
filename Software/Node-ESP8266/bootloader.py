@@ -1,6 +1,4 @@
 from config import*
-
-
 from MQTT import MQTT
 from wifi import WIFI
 from cultivo import Cultivo
@@ -8,6 +6,8 @@ from debug import debug_mode
 #import machine
 #import socket
 import time
+
+from umqtt.simple import MQTTClient
 
 
 class Bootloader():
@@ -29,19 +29,22 @@ class Bootloader():
             #mqtt.send_boot("/firmware/" + NAME, FIRMWARE)
             self.debug = debug_mode(True)  # True Or False
             self.wifi = WIFI(self.debug)
-            self.mqtt = MQTT(self.debug)
             self.wifi.connect()
-            print("MODO BOOT")
-            self.mqtt.send_boot("/firmware/" + NAME, self.firmware)
-            self.mqtt.subcribir("/firmware/key")
-            a = 0
-            while a < 100:
-                time.sleep(1)
-                a = a + 1
-                print("halo")
-                self.mqtt.init_recivir()
-                print("halo 2")
-            # time.sleep(10)
+            self.client = MQTTClient("machine_id", "192.168.31.16")
+            self.client.set_callback(self.callback)
+            self.client.connect()
+            self.client.subscribe("/firmware/key/")
+            self.client.wait_msg()
+            self.client.disconnect()
+            # a = 0
+            # while a < 100:
+            #     time.sleep(1)
+            #     a = a + 1
+            #     print("halo")
+            #     self.mqtt.connect()
+            #     self.mqtt.subscribe()
+            #     print("halo 2")
+            # # time.sleep(10)
         else:
             self.run_user()
 
@@ -102,3 +105,6 @@ class Bootloader():
         except:
             import machine
             machine.reset()
+
+    def callback(self, topic, msg):
+        print("LLEGO DATO")
