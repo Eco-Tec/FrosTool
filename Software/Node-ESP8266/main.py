@@ -17,12 +17,10 @@
 
 from MQTT import MQTT
 from wifi import WIFI
+from bootloader import*
 from cultivo import Cultivo
 from debug import debug_mode
 import machine
-
-
-from bootloader import*
 
 if __name__ == '__main__':
     # configurando RTC.ALARM0
@@ -31,8 +29,8 @@ if __name__ == '__main__':
     rtc.irq(trigger=rtc.ALARM0, wake=machine.DEEPSLEEP)
 
     if machine.reset_cause() == machine.DEEPSLEEP_RESET:
-        #boot.read_config()
-        boot.run_boot()
+        # boot.read_config()
+        boot.run_user()
 
-    rtc.alarm(rtc.ALARM0, 10000)
+    rtc.alarm(rtc.ALARM0, 30000)
     machine.deepsleep()

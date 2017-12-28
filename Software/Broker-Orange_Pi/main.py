@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
     DESCRIPCI?N...
@@ -6,7 +6,7 @@
     (see COPYING) WITHOUT ANY WARRANTY.
     You can see a description of license here: http://www.gnu.org/copyleft/gpl.html
     Copyright(c) 2017 by fandres "Fabian Salamanca" <fabian.salamanca@openmailbox.org>
-                         Marlon...
+                         Marlon Mauricio Moreno R.
     Distributed under GPLv3+
     Hardware: Orange Pi Zero
     Pin distribution(Default)
@@ -16,9 +16,9 @@
 """
 
 
-__author__ = "Fabian A. Salamanca F."
+__author__ = "Fabian A. Salamanca F, Marlon Moreno"
 __copyright__ = "Copyright 2017, Eco-Tec"
-__credits__ = ["Fabian A. Salamanca F, Marlon..."]
+__credits__ = ["Fabian A. Salamanca F, Marlon M. Moreno R"]
 __license__ = "GPL V3.0"
 __version__ = "1.4"
 __maintainer__ = __author__
@@ -256,4 +256,3 @@ class main():
 ##########----------    Main   ----------##########
 if __name__ == '__main__':
     main = main()
-

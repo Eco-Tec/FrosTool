@@ -20,12 +20,14 @@ class WIFI():
     def connect(self, name=SSID, passw=PASSWORD):
         """Establece la conexión, recibe el nombre
            y clave de la red """
-        if not self.sta_if.isconnected():
+        while not self.sta_if.isconnected():
             self.intentos = 0
             self.sta_if.active(True)
             self.debug.printDebug('Conectando a la Red ...')
             self.sta_if.connect(name, passw)
             self.event(self.status())
+        else:
+            self.debug.printDebug('Conexcion establecida)
             self.debug.visual()  # Debug
 
     def event(self, intento):
