@@ -1,9 +1,9 @@
 from umqtt.simple import MQTTClient
 # from ubinascii import hexlify
 # from machine import unique_id
-from config import BROKER
+from config import *
 from config import topico
-
+import time
 
 class MQTT():
     """Clase para gestionar la transmición y Recepcion de datos
@@ -14,12 +14,19 @@ class MQTT():
         self.debug = debug
         # self.CLIENT_ID = hexlify(unique_id())
         self.CLIENT_ID = "NODO_2"
+        self.list_topic = {}
         self.client_mqtt = MQTTClient(self.CLIENT_ID, BROKER)
         self.debug_mode = 1  # Debug On:1 | Off:0
-        self.client_mqtt.set_callback(self.callback)
+        #self.client_mqtt.set_callback(self.callback)
 
-    def callback(self, topic, msg):
-        print(msg)
+    def add_topic(self, topic):
+        self.list_topic[topic] = topic
+        self.client_mqtt.subscribe(topic)
+
+    #def callback(self, topic, msg):
+    #    if topic==topic_boot:
+
+            #print((topic, str(msg)))
 
     def connect(self):
         "Metodo que realiza la Conexion al protocolo MQTT"
@@ -40,35 +47,21 @@ class MQTT():
     def send(self, topic, data, sensor):
         "Envio Datos mediante el protocolo MQTT"
         try:
-            self.connect()
+            #self.connect()
             self.client_mqtt.publish(topic + topico + sensor, str(data))
-            self.disconnect()
+            #self.disconnect()
             self.debug.printDebug({"Enviado dato ....", topic + topico, data})
             self.debug.visual()  # Debug
         except Exception as e:
             self.disconnect()
             self.debug.printDebug({"Fallo el envio de datos MQTT ....."}, e)
 
-    def init_recivir(self):
-        self.connect()
-        # self.client_mqtt.subscribe("/firmware/key")
-        self.client_mqtt.wait_msg()
-        self.disconnect()
+    def read(self):
+        self.client_mqtt.check_msg()
 
-    def subcribir(self, topic):
-        self.client_mqtt.connect()
-        # self.mqtt.subcribir("/firmware/key")
-        self.client_mqtt.subscribe(topic)
-        # self.disconnect()
-
-    def set_callback(self):
-        print("Entro set_callback")
+    def subcribir(self):
+        for i in self.list_topic:
+            self.client_mqtt.subscribe(str(i))
 
     def send_boot(self, topic, data):
-        self.connect()
         self.client_mqtt.publish(topic, str(data))
-        self.disconnect()
-
-    def receive(self):
-        "Metodo que recibe datos enviados a traves del protocolo MQTT"
-        pass

@@ -29,8 +29,8 @@ if __name__ == '__main__':
     rtc.irq(trigger=rtc.ALARM0, wake=machine.DEEPSLEEP)
 
     if machine.reset_cause() == machine.DEEPSLEEP_RESET:
-        # boot.read_config()
-        boot.run_user()
+        #boot.read_config()
+        boot.run_boot()
 
-    rtc.alarm(rtc.ALARM0, 30000)
+    rtc.alarm(rtc.ALARM0, 10000)
     machine.deepsleep()
