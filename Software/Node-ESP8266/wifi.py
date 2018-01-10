@@ -27,7 +27,7 @@ class WIFI():
             self.sta_if.connect(name, passw)
             self.event(self.status())
         else:
-            self.debug.printDebug('Conexcion establecida)
+            self.debug.printDebug("Conexión establecida")
             self.debug.visual()  # Debug
 
     def event(self, intento):

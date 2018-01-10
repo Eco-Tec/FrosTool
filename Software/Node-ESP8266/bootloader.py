@@ -1,13 +1,11 @@
-from config import*
+from config import NAME
+from cultivo import Cultivo
 from MQTT import MQTT
 from wifi import WIFI
-from cultivo import Cultivo
 from debug import debug_mode
 #import machine
 #import socket
 import time
-
-from umqtt.simple import MQTTClient
 
 
 class Bootloader():
@@ -22,18 +20,23 @@ class Bootloader():
         # self.read_config()
 
     def run_boot(self):
-        """Se entra en modo bootloader deacuerto a la solicitud del broker"""
+        """Se entra en modo bootloader de acuerto a la solicitud del broker"""
         self.read_config()
         print(self.mode)
         if self.mode:
-            print("modo boot")
+            print("modo boot")  # Debug
             self.debug = debug_mode(True)  # True Or False
             self.wifi = WIFI(self.debug)
             self.wifi.connect()
-            self.mqtt = MQTT(self.debug)
-            self.mqtt.connect()
-            self.mqtt.send_boot("/firmware/" + NAME, self.firmware)
-            self.mqtt.disconnect()
+            try:
+                if self.wifi.sta_if.isconnected():
+                    self.mqtt = MQTT(self.debug)
+                    self.mqtt.connect()
+                    self.mqtt.send_boot("/firmware/" + NAME, self.firmware)
+                    self.mqtt.disconnect()
+            except OSError:
+                import machine
+                machine.reset()
         else:
             self.run_user()
 
@@ -112,15 +115,13 @@ class Bootloader():
     def state(self):
         try:
             if self.read[topic_key] == key:
-            #if self.firmware< self
+                # if self.firmware< self
                 self.set_mode(True)
                 self.salvar_modo()
-                print ("autorizado")
+                print("autorizado")
         except:
             print("no boot")
 
-
-
     def callback(self, topic, msg):
         print("LLEGO DATO")
-        self.read[topic]=msg
+        self.read[topic] = msg
