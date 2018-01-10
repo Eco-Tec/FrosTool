@@ -19,7 +19,7 @@ class WIFI():
         self.sta_if = network.WLAN(network.STA_IF)
         # self.ap_if =WLAN(network.AP_IF)
         self.intentos = 0
-        self.t_reconect = 10
+        self.t_reconect = 10  # Evaluar
 
     def connect(self, name=SSID, passw=PASSWORD):
         """Establece la conexión, recibe el nombre
@@ -31,7 +31,7 @@ class WIFI():
             self.sta_if.connect(name, passw)
             self.event(self.status())
         else:
-            self.debug.printDebug("Conexión establecida")
+            self.debug.printDebug({"\n\n\nConexion establecida."})
             self.debug.visual()  # Debug
 
     def event(self, intento):
@@ -60,13 +60,12 @@ class WIFI():
             except Exception as error:
                 self.event(self.status())
                 self.debug.printDebugDebug(
-                    {"Desconectado de la Red... Error:"}, error)
+                    {"Desconectado de la Red..."}, error)
 
     def status(self):
         """Determina el estado de la conexion y las posibles
            causas de errores"""
-        self.debug.printDebug("Estado de conexion ....")
-        self.debug.printDebug(
-            {'Configuracion de la Red:', self.sta_if.ifconfig()})
+        self.debug.printDebug("\nEstado de conexion ...")
+        self.debug.printDebug({'<-- Configuracion de la Red', self.sta_if.ifconfig()})
         self.debug.printDebug(str(self.estado[self.sta_if.status()]))
         return(self.sta_if.status())

@@ -26,7 +26,6 @@ class Bootloader():
     def run_boot(self):
         """Modo bootloader dada la solicitud del broker"""
         self.read_config()
-        print(self.mode)
         if self.mode:
             print("modo boot")  # Debug
             self.debug = debug_mode(True)  # True Or False

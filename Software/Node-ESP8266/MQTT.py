@@ -2,8 +2,8 @@
 # imports modulos
 from config import BROKER, topico
 # imports library python
-#from ubinascii import hexlify
-#from machine import unique_id
+# from ubinascii import hexlify
+# from machine import unique_id
 # imports library Micro-python
 from umqtt.simple import MQTTClient
 
@@ -29,7 +29,7 @@ class MQTT():
     # def callback(self, topic, msg):
     #    if topic==topic_boot:
 
-        #print((topic, str(msg)))
+        # print((topic, str(msg)))
 
     def connect(self):
         "Metodo que realiza la Conexion al protocolo MQTT"
@@ -38,16 +38,16 @@ class MQTT():
             self.debug.printDebug("Conectando al Broker ....")
         except Exception as error:
             self.debug.printDebug(
-                {"Broker no disponble (Address, Service). Error:"}, error)
+                {"Broker no disponble (Address, Service)."}, error)
 
     def disconnect(self):
         "Metodo que realiza la Desconexion al protocolo MQTT"
         try:
             self.client_mqtt.disconnect()
-            self.debug.printDebug("Desconectado del Broker .....")
+            self.debug.printDebug("Desconectado del Broker ...")
         except Exception as error:
             self.debug.printDebug(
-                {"Conexion MQTT no disponble ..... Error:"}, error)
+                {"Conexion MQTT no disponble ..."}, error)
 
     def send(self, topic, data, sensor):
         "Envio Datos mediante el protocolo MQTT"
@@ -60,7 +60,7 @@ class MQTT():
         except Exception as error:
             self.disconnect()
             self.debug.printDebug(
-                {"Fallo el envio de datos MQTT ..... Error: "}, error)
+                {"Fallo el envio de datos MQTT ..."}, error)
 
     def read(self):
         self.client_mqtt.check_msg()
