@@ -1,6 +1,10 @@
+# imports hardware
+# imports modulos
+# imports library python
+from time import sleep_ms
+# imports library Micro-python
 import esp
 import machine
-from time import sleep_ms
 #from umqtt.simple import MQTTClient
 
 

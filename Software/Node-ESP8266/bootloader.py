@@ -1,11 +1,15 @@
-from config import NAME
+# imports hardware
+# imports modulos
+from config import NAME, key
 from cultivo import Cultivo
 from MQTT import MQTT
 from wifi import WIFI
 from debug import debug_mode
+# imports library python
+from time import sleep
+# imports library Micro-python
 #import machine
 #import socket
-import time
 
 
 class Bootloader():
@@ -16,11 +20,11 @@ class Bootloader():
         self.read = {}
         self.mode = False
         self.firmware = 1.0
-        #self.config_boot = open("config_boot.txt", 'r+')
+        # self.config_boot = open("config_boot.txt", 'r+')
         # self.read_config()
 
     def run_boot(self):
-        """Se entra en modo bootloader de acuerto a la solicitud del broker"""
+        """Modo bootloader dada la solicitud del broker"""
         self.read_config()
         print(self.mode)
         if self.mode:
@@ -41,55 +45,62 @@ class Bootloader():
             self.run_user()
 
     def set_firmware(self, version):
+        """DOCSTRSINGS"""
         self.firmware = version
 
     def set_mode(self, mode):
+        """DOCSTRSINGS"""
         self.mode = mode
 
     def salvar_modo(self):
-        a = open("config_boot.txt", 'r+')
-        ar = a.readline()
-        while ar != "":
-            am = ar.split(" = ")
-            if am[0] == "MODE":
-                a.write("MODE = " + str(self.mode) + '\n')
-            elif am[0] == "FIRMWARE":
-                a.write("FIRMWARE = " + str(self.firmware) + '\n')
-            ar = a.readline()
-        a.close()
+        """DOCSTRSINGS"""
+        file_config_boot = open("config_boot.txt", 'r+')
+        file_read_line = file_config_boot.readline()
+        while file_read_line != "":
+            file_line_split = file_read_line.split(" = ")
+            if file_line_split[0] == "MODE":
+                file_config_boot.write("MODE = " + str(self.mode) + '\n')
+            elif file_line_split[0] == "FIRMWARE":
+                file_config_boot.write(
+                    "FIRMWARE = " + str(self.firmware) + '\n')
+            file_read_line = file_config_boot.readline()
+        file_config_boot.close()
         self.print_txt()
 
     def print_txt(self):
-        a = open("config_boot.txt", 'r+')
-        ar = a.readline()
-        while ar != "":
-            print(ar)
-            ar = a.readline()
-        a.close()
+        """DOCSTRSINGS"""
+        file_config_boot = open("config_boot.txt", 'r+')
+        file_read_line = file_config_boot.readline()
+        while file_read_line != "":
+            print(file_read_line)
+            file_read_line = file_config_boot.readline()
+        file_config_boot.close()
 
     def read_config(self):
-        m = open("config_boot.txt", 'r+')
-        ar = m.readline()
-        while ar != "":
-            a = ar.split(" = ")
-            if a[0] == "FIRMWARE":
+        """DOCSTRSINGS"""
+        file_config_boot = open("config_boot.txt", 'r+')
+        file_read_line = file_config_boot.readline()
+        while file_read_line != "":
+            file_config_boot = file_read_line.split(" = ")
+            if file_config_boot[0] == "FIRMWARE":
                 # print(a[1])
-                self.firmware = float(a[1])
+                self.firmware = float(file_config_boot[1])
                 # print(self.firmware)
-            elif a[0] == "MODE":
-                if a[1] == "True\n":
+            elif file_config_boot[0] == "MODE":
+                if file_config_boot[1] == "True\n":
                     self.mode = True
-                if a[1] == "False\n":
+                if file_config_boot[1] == "False\n":
                     self.mode = False
-            ar = m.readline()
+            file_read_line = file_config_boot.readline()
             # print(self.mode)
             # print(self.firmware)
-        m.close()
+        file_config_boot.close()
         self.print_txt()
-        #self.firmware =self.firmware + 0.1
+        # self.firmware =self.firmware + 0.1
         # print(self.firmware)
 
     def run_user(self):
+        """DOCSTRSINGS"""
         try:
             self.debug = debug_mode(True)  # True Or False
             self.wifi = WIFI(self.debug)
@@ -101,10 +112,10 @@ class Bootloader():
             self.cultivo.read_sensores()
             self.cultivo.send_data()
             self.mqtt.add_topic(topic_key)
-            a = 0
-            while a < 20:
-                time.sleep(1)
-                a = a + 1
+            count_time = 0
+            while count_time < 20:
+                sleep(1)
+                count_time = count_time + 1
                 self.mqtt.read()
             self.mqtt.disconnect()
             self.state()
@@ -113,15 +124,17 @@ class Bootloader():
             machine.reset()
 
     def state(self):
+        """DOCSTRSINGS"""
         try:
             if self.read[topic_key] == key:
                 # if self.firmware< self
                 self.set_mode(True)
                 self.salvar_modo()
-                print("autorizado")
+                print("Autorizado")  # Debug
         except:
-            print("no boot")
+            print("No boot")  # Debug
 
     def callback(self, topic, msg):
-        print("LLEGO DATO")
+        "Metodo que se ejcuta cuando llega un mensaje"
+        print("LLEGO DATO")  # Debug
         self.read[topic] = msg

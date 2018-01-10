@@ -1,6 +1,10 @@
-import time
-import network
+# imports hardware
+# imports modulos
 from config import SSID, PASSWORD
+# imports library python
+import time
+# imports library Micro-python
+import network
 
 
 class WIFI():
@@ -36,7 +40,8 @@ class WIFI():
         self.intentos = self.intentos + 1
         if not self.sta_if.isconnected():
             if intento == 1 and self.intentos < 25:
-                self.debug.printDebug("Intento de reconección No.", self.intentos)
+                self.debug.printDebug(
+                    "Intento de reconección No.", self.intentos)
                 self.t_reconect = self.t_reconect * 2
                 time.sleep_ms(self.t_reconect)
                 self.event(self.status())
@@ -52,14 +57,16 @@ class WIFI():
                 self.sta_if.disconnect()
                 self.sta_if.active(False)
                 time.sleep_ms(1000)
-            except Exception as e:
+            except Exception as error:
                 self.event(self.status())
-                self.debug.printDebugDebug("Desconectado de la Red...")
+                self.debug.printDebugDebug(
+                    {"Desconectado de la Red... Error:"}, error)
 
     def status(self):
         """Determina el estado de la conexion y las posibles
            causas de errores"""
         self.debug.printDebug("Estado de conexion ....")
-        self.debug.printDebug({'Configuracion de la Red:', self.sta_if.ifconfig()})
+        self.debug.printDebug(
+            {'Configuracion de la Red:', self.sta_if.ifconfig()})
         self.debug.printDebug(str(self.estado[self.sta_if.status()]))
         return(self.sta_if.status())

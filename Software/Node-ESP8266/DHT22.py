@@ -1,3 +1,7 @@
+# imports hardware
+# imports modulos
+# imports library python
+# imports library Micro-python
 import dht
 import machine
 

@@ -1,9 +1,12 @@
+# imports hardware
+# imports modulos
+from config import BROKER, topico
+# imports library python
+#from ubinascii import hexlify
+#from machine import unique_id
+# imports library Micro-python
 from umqtt.simple import MQTTClient
-# from ubinascii import hexlify
-# from machine import unique_id
-from config import *
-from config import topico
-import time
+
 
 class MQTT():
     """Clase para gestionar la transmición y Recepcion de datos
@@ -17,44 +20,47 @@ class MQTT():
         self.list_topic = {}
         self.client_mqtt = MQTTClient(self.CLIENT_ID, BROKER)
         self.debug_mode = 1  # Debug On:1 | Off:0
-        #self.client_mqtt.set_callback(self.callback)
+        # self.client_mqtt.set_callback(self.callback)
 
     def add_topic(self, topic):
         self.list_topic[topic] = topic
         self.client_mqtt.subscribe(topic)
 
-    #def callback(self, topic, msg):
+    # def callback(self, topic, msg):
     #    if topic==topic_boot:
 
-            #print((topic, str(msg)))
+        #print((topic, str(msg)))
 
     def connect(self):
         "Metodo que realiza la Conexion al protocolo MQTT"
         try:
             self.client_mqtt.connect()
             self.debug.printDebug("Conectando al Broker ....")
-        except Exception as e:
-            self.debug.printDebug({"Broker no disponble (Address, Service). "}, e)
+        except Exception as error:
+            self.debug.printDebug(
+                {"Broker no disponble (Address, Service). Error:"}, error)
 
     def disconnect(self):
         "Metodo que realiza la Desconexion al protocolo MQTT"
         try:
             self.client_mqtt.disconnect()
             self.debug.printDebug("Desconectado del Broker .....")
-        except Exception as e:
-            self.debug.printDebug({"Conexion MQTT no disponble ....."}, e)
+        except Exception as error:
+            self.debug.printDebug(
+                {"Conexion MQTT no disponble ..... Error:"}, error)
 
     def send(self, topic, data, sensor):
         "Envio Datos mediante el protocolo MQTT"
         try:
-            #self.connect()
+            # self.connect()
             self.client_mqtt.publish(topic + topico + sensor, str(data))
-            #self.disconnect()
+            # self.disconnect()
             self.debug.printDebug({"Enviado dato ....", topic + topico, data})
             self.debug.visual()  # Debug
-        except Exception as e:
+        except Exception as error:
             self.disconnect()
-            self.debug.printDebug({"Fallo el envio de datos MQTT ....."}, e)
+            self.debug.printDebug(
+                {"Fallo el envio de datos MQTT ..... Error: "}, error)
 
     def read(self):
         self.client_mqtt.check_msg()
