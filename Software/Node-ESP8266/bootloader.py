@@ -77,26 +77,25 @@ class Bootloader():
         file_config_boot.close()
 
     def read_config(self):
-        """DOCSTRSINGS"""
         file_config_boot = open("config_boot.txt", 'r+')
-        file_read_line = file_config_boot.readline()
-        while file_read_line != "":
-            file_config_boot = file_read_line.split(" = ")
-            if file_config_boot[0] == "FIRMWARE":
-                # print(a[1])
-                self.firmware = float(file_config_boot[1])
+        linea = file_config_boot.readline()
+        while linea != "":
+            split = linea.split(" = ")
+            if split[0] == "FIRMWARE":
+                # print(split[1])
+                self.firmware = float(split[1])
                 # print(self.firmware)
-            elif file_config_boot[0] == "MODE":
-                if file_config_boot[1] == "True\n":
+            elif split[0] == "MODE":
+                if split[1] == "True\n":
                     self.mode = True
-                if file_config_boot[1] == "False\n":
+                if split[1] == "False\n":
                     self.mode = False
-            file_read_line = file_config_boot.readline()
+            linea = file_config_boot.readline()
             # print(self.mode)
             # print(self.firmware)
         file_config_boot.close()
         self.print_txt()
-        # self.firmware =self.firmware + 0.1
+        #self.firmware =self.firmware + 0.1
         # print(self.firmware)
 
     def run_user(self):
