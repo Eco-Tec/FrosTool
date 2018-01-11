@@ -2,5 +2,8 @@
 PASSWORD = "my_password"
 BROKER = "192.168.0.16"
 SSID = "my_red"
+NAME = "CLIENT_ID"
+MQTT_PASS = b"my_mqtt_password"
 topico = "/cultivo/"
+topic_key = ""
 sensor_list = {"sensor 1": "DHT22", "sensor 2": "DHT22", "sensor 3": "DHT22"}
