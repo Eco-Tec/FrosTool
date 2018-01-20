@@ -1,6 +1,10 @@
 ﻿CONFIG = b""
+SSID = "my_red"
 PASSWORD = "my_password"
 BROKER = "192.168.0.16"
-SSID = "my_red"
-topico = "/cultivo/"
+PORT = 8883
+NAME = "CLIENT_ID"
+#MQTT_PASS = b"my_mqtt_password"
+topic_key = b"/firmware/key/"
 sensor_list = {"sensor 1": "DHT22", "sensor 2": "DHT22", "sensor 3": "DHT22"}
+key = "firmware_1.4"

@@ -6,6 +6,7 @@ from debug import debug_mode
 #import machine
 #import socket
 import time
+import socket
 
 from umqtt.simple import MQTTClient
 
@@ -18,13 +19,12 @@ class Bootloader():
         self.read = {}
         self.mode = False
         self.firmware = 1.0
-        #self.config_boot = open("config_boot.txt", 'r+')
-        # self.read_config()
+
+        self.read_config()
 
     def run_boot(self):
         """Se entra en modo bootloader deacuerto a la solicitud del broker"""
-        self.read_config()
-        print(self.mode)
+        #self.read_config()
         if self.mode:
             print("modo boot")
             self.debug = debug_mode(True)  # True Or False
@@ -33,8 +33,10 @@ class Bootloader():
             self.mqtt = MQTT(self.debug)
             self.mqtt.connect()
             self.mqtt.send_boot("/firmware/" + NAME, self.firmware)
+            self.save_file("plantilla.txt")
             self.mqtt.disconnect()
         else:
+            print("modo user")
             self.run_user()
 
     def set_firmware(self, version):
@@ -45,13 +47,17 @@ class Bootloader():
 
     def salvar_modo(self):
         a = open("config_boot.txt", 'r+')
+        c = a.tell()
         ar = a.readline()
         while ar != "":
             am = ar.split(" = ")
             if am[0] == "MODE":
+                a.seek(c)
                 a.write("MODE = " + str(self.mode) + '\n')
             elif am[0] == "FIRMWARE":
+                a.seek(c)
                 a.write("FIRMWARE = " + str(self.firmware) + '\n')
+            c = a.tell()
             ar = a.readline()
         a.close()
         self.print_txt()
@@ -70,21 +76,15 @@ class Bootloader():
         while ar != "":
             a = ar.split(" = ")
             if a[0] == "FIRMWARE":
-                # print(a[1])
                 self.firmware = float(a[1])
-                # print(self.firmware)
             elif a[0] == "MODE":
                 if a[1] == "True\n":
                     self.mode = True
                 if a[1] == "False\n":
                     self.mode = False
             ar = m.readline()
-            # print(self.mode)
-            # print(self.firmware)
         m.close()
         self.print_txt()
-        #self.firmware =self.firmware + 0.1
-        # print(self.firmware)
 
     def run_user(self):
         try:
@@ -119,7 +119,24 @@ class Bootloader():
         except:
             print("no boot")
 
-
+    def save_file(self, name):
+        self.sock = socket.socket()
+        addr = socket.getaddrinfo(BROKER, 65)[0][-1]
+        print(addr)
+        self.sock.connect(addr)
+        a = True
+        f = open(name, "w")
+        while a:
+            try:
+                res = self.sock.read(1024)
+                if res != END_FILE:
+                    f.write(res)
+                elif res == END_FILE:
+                    a = False
+            except:
+                print( "no data")
+                break
+        self.sock.close()
 
     def callback(self, topic, msg):
         print("LLEGO DATO")

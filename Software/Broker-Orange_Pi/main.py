@@ -37,6 +37,7 @@ import time
 import re
 import queue
 from config import*
+from bootloader import Bootloader
 
 ##########----------    Class   ----------##########
 
@@ -195,13 +196,15 @@ class BrokerManager(threading.Thread):
 
 class main():
     def __init__(self):
-        self.ruta = "/home/data/"
+        self.ruta = "/home/game/data/"
         self.csv = Archivos()
         self.archivos = {}
 
         self.BrokerManager = BrokerManager(self, ip="localhost", port=1883)
         self.BrokerManager.connect()
         self.BrokerManager.start()  # inicia el hilo
+
+        self.boot = Bootloader()
 
         self.hilo_padre = {}
         self.hilo_hijo = {}
@@ -211,6 +214,8 @@ class main():
         # print(self.list_topic)
         # for i in self.archivos:
         #    print("key "+  str(i)+ "  "+"value " + str(self.archivos[i]))
+
+        self.boot.state()
         print("Modo infinito")
         a = 0
         while True:  # a < 500:

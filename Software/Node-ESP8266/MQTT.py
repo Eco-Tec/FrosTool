@@ -1,7 +1,9 @@
 from umqtt.simple import MQTTClient
-# from ubinascii import hexlify
-# from machine import unique_id
-from config import *
+
+#from config import *
+from ubinascii import hexlify
+from machine import unique_id
+from config import BROKER, PORT, NAME, MQTT_PASS
 from config import topico
 import time
 
@@ -15,7 +17,9 @@ class MQTT():
         # self.CLIENT_ID = hexlify(unique_id())
         self.CLIENT_ID = "NODO_2"
         self.list_topic = {}
-        self.client_mqtt = MQTTClient(self.CLIENT_ID, BROKER)
+        self.CLIENT_ID = hexlify(unique_id())
+        self.client_mqtt = MQTTClient(self.CLIENT_ID, BROKER, PORT, NAME, MQTT_PASS)
+
         self.debug_mode = 1  # Debug On:1 | Off:0
         #self.client_mqtt.set_callback(self.callback)
 
