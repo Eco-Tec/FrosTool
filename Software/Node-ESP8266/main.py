@@ -14,12 +14,11 @@
     Pin 2   ->  Debug Visual(Default=Off), Led On Userled: for development board ESP8266
 """
 
-
-from MQTT import MQTT
-from wifi import WIFI
-from bootloader import*
-from cultivo import Cultivo
-from debug import debug_mode
+# imports hardware
+# imports modulos
+from bootloader import Bootloader
+# imports library python
+# imports library Micro-python
 import machine
 
 if __name__ == '__main__':
@@ -29,7 +28,7 @@ if __name__ == '__main__':
     rtc.irq(trigger=rtc.ALARM0, wake=machine.DEEPSLEEP)
 
     if machine.reset_cause() == machine.DEEPSLEEP_RESET:
-        #boot.read_config()
+        # boot.read_config()
         boot.run_boot()
 
     rtc.alarm(rtc.ALARM0, 10000)

@@ -1,4 +1,8 @@
+# imports hardware
+# imports modulos
 from config import sensor_list
+# imports library python
+# imports library Micro-python
 from DHT22 import DHT22
 
 
