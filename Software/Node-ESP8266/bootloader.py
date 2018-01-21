@@ -1,15 +1,15 @@
 # imports hardware
 # imports modulos
-from config import NAME, key, BROKER
+from config import NAME, key, BROKER, END_FILE
 from cultivo import Cultivo
 from MQTT import MQTT
 from wifi import WIFI
 from debug import debug_mode
+from config import SSID, PASSWORD
+# imports library python
+import network
 # imports library python
 from time import sleep
-# imports library Micro-python
-#import machine
-#import socket
 import time
 import socket
 
@@ -32,17 +32,73 @@ class Bootloader():
         #self.read_config()
         if self.mode:
             print("modo boot")  # Debug
-            self.debug = debug_mode(True)  # True Or False
-            self.wifi = WIFI(self.debug)
-            self.wifi.connect()
-            self.mqtt = MQTT(self.debug)
-            self.mqtt.connect()
-            self.mqtt.send_boot("/firmware/" + NAME, self.firmware)
-            self.save_file("plantilla.txt")
-            self.mqtt.disconnect()
+            #self.debug = debug_mode(True)  # True Or False
+            #self.wifi = WIFI(self.debug)
+            #self.wifi.connect()
+            self.wifi_init()
+            self.wifi_connect()
+            self.sock = socket.socket()
+            self.addr = socket.getaddrinfo(BROKER, 45)[0][-1]
+            print(self.addr)
+            #self.mqtt = MQTT(self.debug)
+            #self.mqtt.connect()
+            self.sock.connect(self.addr)
+            self.sock.send("/firware/"+ str(NAME))
+            #self.mqtt.send_boot("/firmware/" + NAME, self.firmware)
+            #self.save_file("plantilla.txt")
+            #self.mqtt.disconnect()
         else:
             print("modo user")
             self.run_user()
+
+    def wifi_init(self):
+        self.estado = {0: 'no connection and no activity', 1: 'connecting in progress',
+                       2: 'failed due to incorrect password', 3: 'failed because no access point replied',
+                       4: 'failed due to other problems', 5: 'connection successful', 255: ""}
+        self.sta_if = network.WLAN(network.STA_IF)
+        # self.ap_if =WLAN(network.AP_IF)
+        self.intentos = 1
+        self.t_reconect = 50  # Evalua
+
+    def wifi_connect(self, name=SSID, passw=PASSWORD):
+        """Establece la conexión, recibe el nombre
+           y clave de la red """
+        while not self.sta_if.isconnected():
+            self.intentos = 0
+            self.sta_if.active(True)
+            print('Conectando a la Red ...')
+            self.sta_if.connect(name, passw)
+            self.wifi_event()
+        else:
+            print("Conexion establecida.")
+            #self.debug.visual()  # Debug
+
+    def wifi_event(self):
+        """ Rutina de reintento de reconexion,
+            por cada intento duplica el tiempo de espera """
+        while not self.sta_if.isconnected():
+            self.intentos = self.intentos + 1
+            if self.intentos < 200:
+                #print("Intento de reconección No.", self.intentos)
+                time.sleep_ms(self.t_reconect)
+                #self.status()
+            else:
+                self.wifi_disconnect()
+                import machine
+                machine.deepsleep()
+        else:
+            print(str(self.estado[self.sta_if.status()]))
+
+    def wifi_disconnect(self):
+        """Termina una conexión existente y deja
+           disponble el modulo para Recibir otra conexion"""
+        try:
+            self.sta_if.disconnect()
+        except:
+            print("no desconectado")
+
+
+
 
     def set_firmware(self, version):
         """DOCSTRSINGS"""
@@ -131,23 +187,18 @@ class Bootloader():
             print("no boot")
 
     def save_file(self, name):
-        self.sock = socket.socket()
-        addr = socket.getaddrinfo(BROKER, 65)[0][-1]
-        print(addr)
-        self.sock.connect(addr)
+        self.sock.connect(self.addr)
         a = True
         f = open(name, "w")
         while a:
-            try:
-                res = self.sock.read(1024)
-                if res != END_FILE:
-                    f.write(res)
-                elif res == END_FILE:
-                    a = False
-            except:
-                print( "no data")
-                break
+            res = self.sock.readline().decode()
+            if res == "END_FILE\n":
+                print("sale")
+                a = False
+            else:
+                f.write(res)
         self.sock.close()
+        f.close()
 
     def callback(self, topic, msg):
         "Metodo que se ejcuta cuando llega un mensaje"

@@ -1,16 +1,11 @@
 # FrosTool by Eco-Tec
 # Copyrigh
-<<<<<<< HEAD
 # License
 # Generado por el Broker
 # Version
 # fecha
 # NODO
-=======
 # revision
-# Generado por el Broker
-# fecha
->>>>>>> 0a1f9eebffa5980523b84eeb21809c5a4855608b
 # SENSOR
 # UBICACION
 
