@@ -18,8 +18,8 @@ class WIFI():
                        4: 'failed due to other problems', 5: 'connection successful', 255: ""}
         self.sta_if = network.WLAN(network.STA_IF)
         # self.ap_if =WLAN(network.AP_IF)
-        self.intentos = 0
-        self.t_reconect = 10  # Evaluar
+        self.intentos = 1
+        self.t_reconect = 50  # Evaluar
 
     def connect(self, name=SSID, passw=PASSWORD):
         """Establece la conexión, recibe el nombre
@@ -29,29 +29,35 @@ class WIFI():
             self.sta_if.active(True)
             self.debug.printDebug('Conectando a la Red ...')
             self.sta_if.connect(name, passw)
-            self.event(self.status())
+            self.event()
         else:
-            self.debug.printDebug({"\n\n\nConexion establecida."})
+            self.debug.printDebug({"Conexion establecida."})
             self.debug.visual()  # Debug
 
-    def event(self, intento):
+    def event(self):
         """ Rutina de reintento de reconexion,
             por cada intento duplica el tiempo de espera """
-        self.intentos = self.intentos + 1
-        if not self.sta_if.isconnected():
-            if intento == 1 and self.intentos < 25:
-                self.debug.printDebug(
-                    "Intento de reconección No.", self.intentos)
-                self.t_reconect = self.t_reconect * 2
+        #self.intentos = self.intentos + 1
+        while not self.sta_if.isconnected():
+            self.intentos = self.intentos + 1
+            if self.intentos < 200:
+                self.debug.printDebug("Intento de reconección No.", self.intentos)
                 time.sleep_ms(self.t_reconect)
-                self.event(self.status())
+                self.status()
             else:
+                self.disconnect()
                 import machine
-                machine.reset()
+                machine.deepsleep()
+        else:
+            self.status()
 
     def disconnect(self):
         """Termina una conexión existente y deja
            disponble el modulo para Recibir otra conexion"""
+        try:
+            self.sta_if.disconnect()
+        except:
+            print("no desconectado")
         if self.sta_if.isconnected():
             try:
                 self.sta_if.disconnect()
@@ -68,4 +74,4 @@ class WIFI():
         self.debug.printDebug("\nEstado de conexion ...")
         self.debug.printDebug({'<-- Configuracion de la Red', self.sta_if.ifconfig()})
         self.debug.printDebug(str(self.estado[self.sta_if.status()]))
-        return(self.sta_if.status())
+        #return(self.sta_if.status())

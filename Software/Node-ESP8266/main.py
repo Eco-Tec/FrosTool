@@ -31,5 +31,5 @@ if __name__ == '__main__':
         # boot.read_config()
         boot.run_boot()
 
-    rtc.alarm(rtc.ALARM0, 10000)
+    rtc.alarm(rtc.ALARM0, 30000)
     machine.deepsleep()
