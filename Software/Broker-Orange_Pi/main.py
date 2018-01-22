@@ -18,15 +18,16 @@
 
 __author__ = "Fabian A. Salamanca F."
 __copyright__ = "Copyright 2017, Eco-Tec"
-__credits__ = ["Fabian A. Salamanca F, Marlon..."]
+__credits__ = ["Fabian A. Salamanca F, Marlon Mauricio Moreno"]
 __license__ = "GPL V3.0"
-__version__ = "1.4"
+__version__ = "1.4.1"
 __maintainer__ = __author__
 __email__ = "fabian.salamanca@gmail.com"
 
 # imports hardware
 #import OPi.GPIO as GPIO
 # imports modulos
+from config import BROKER_IP, USER, PASSWORD
 #from config import BROKER
 import paho.mqtt.client as mqtt
 # imports library python
@@ -36,7 +37,7 @@ from time import time, sleep
 import time
 import re
 import queue
-from config import*
+from config import*  # IMPORTAR SOLO LO USADO
 
 ##########----------    Class   ----------##########
 
@@ -75,7 +76,8 @@ class Archivos ():
                 # print(m)
                 self.file.write(m)
             elif linea == "# fecha\n":
-                m = re.sub("\n", "  ," + time.strftime("%d/%m/%y") + "\n", linea)
+                m = re.sub("\n", "  ," +
+                           time.strftime("%d/%m/%y") + "\n", linea)
                 # print(m)
                 self.file.write(m)
             elif linea == "# UBICACION\n":
@@ -144,7 +146,7 @@ class BrokerManager(threading.Thread):
     """Clase que gestiona el Broker, la activacion y pausa de la alarma
     Ademas de lavisualizacion de los datos obtenidos y sus estados"""
 
-    def __init__(self, main, ip="localhost", port=1883):
+    def __init__(self, main, ip=BROKER_IP, port=1883):
         threading.Thread.__init__(self)
         self.Client = mqtt.Client()
         self._ip = ip
@@ -184,7 +186,8 @@ class BrokerManager(threading.Thread):
         a.close()
 
     def connect(self):
-        self.Client.connect(self._ip, self._port, 60)
+        self.Client.username_pw_set(USER, password=PASSWORD)
+        self.Client.connect(self._ip, self._port, keepalive=15)
 
     def disconnect(self):
         self.Client.disconnect()
@@ -199,7 +202,7 @@ class main():
         self.csv = Archivos()
         self.archivos = {}
 
-        self.BrokerManager = BrokerManager(self, ip="localhost", port=1883)
+        self.BrokerManager = BrokerManager(self, ip=BROKER_IP, port=1883)
         self.BrokerManager.connect()
         self.BrokerManager.start()  # inicia el hilo
 
@@ -228,7 +231,8 @@ class main():
                # print(m)
                 if "SENSOR" in m:
                     for n in LIST_SENSOR[i][m]:
-                        topic = f + str(LIST_SENSOR[i][m][n][0]) + "/" + i + "/" + m
+                        topic = f + \
+                            str(LIST_SENSOR[i][m][n][0]) + "/" + i + "/" + m
                         self.list_topic["topic_" + str(c)] = topic
                         name = str(LIST_SENSOR[i][m][n][1]) + "/" + i + "/" + m
                         name = re.sub("/", "_", name)
@@ -238,10 +242,12 @@ class main():
 
     def add_file(self, name, topic, var, location, nodo, sensor):
         """Crea un archivo nuevo y lo agrega al diccionario """
-        name = self.ruta + str(name) + "_" + time.strftime("%d_%m_%y") + "_" + ".csv"
+        name = self.ruta + str(name) + "_" + \
+            time.strftime("%d_%m_%y") + "_" + ".csv"
         self.archivos[topic] = name
         # print(topic)
-        self.csv.crear_file(name, BROKER["NUMBER_BROKER"], location, nodo, sensor, var)
+        self.csv.crear_file(
+            name, BROKER["NUMBER_BROKER"], location, nodo, sensor, var)
 
     def add_hilos(self, hilo_padre, hilo_hijo):
         cola = Queue.Queue()
@@ -256,4 +262,3 @@ class main():
 ##########----------    Main   ----------##########
 if __name__ == '__main__':
     main = main()
-
