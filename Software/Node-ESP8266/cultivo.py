@@ -5,10 +5,9 @@ from DHT22 import DHT22
 class Cultivo():
     "Clase que gestiona los datos del cultivo especifico"
 
-    def __init__(self, debug, mqtt):
+    def __init__(self, debug):
         super(Cultivo, self).__init__()
         self.debug = debug
-        self.mqtt = mqtt
         self.sensores = {}
         self.data = {}
         # self.sensor=sensor_list
@@ -29,11 +28,12 @@ class Cultivo():
         for sensor in sensor_list:
             self.data[sensor] = self.sensores[sensor].readData()
         self.debug.printDebug(self.data)  # Debug
+        print("DATOS LEIDOS")
         self.debug.visual()  # Debug
 
-    def send_data(self):
-        "Envia los datos de los diferentes sensores haciendo uso del protocolo MQTT"
-        for sensor in sensor_list:
-            for topic, data in self.data[sensor].items():
-                self.mqtt.send(topic, data, self.data[sensor]["name"])
-                # self.debug.printDebug(topic)  # Debug
+    # def send_data(self):
+    #     "Envia los datos de los diferentes sensores haciendo uso del protocolo MQTT"
+    #     for sensor in sensor_list:
+    #         for topic, data in self.data[sensor].items():
+    #             self.debug.printDebug((topic, data, self.data[sensor]["name"])
+    #             # self.debug.printDebug(topic)  # Debug
