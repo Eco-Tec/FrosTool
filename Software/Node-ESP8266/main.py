@@ -32,6 +32,7 @@ if __name__ == '__main__':
             debug = debug_mode(False)  # True Or False
             cultivo = Cultivo(debug)
             cultivo.read_sensores()
+            cultivo.saveData()
         except:
             import machine
             machine.reset()

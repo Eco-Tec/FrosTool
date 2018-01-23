@@ -24,16 +24,20 @@ class Cultivo():
             self.sensores[name] = DHT22(self.debug, name, pin_dht=4)
 
     def read_sensores(self):
-        "Realzia la lectura de las variables fisicas de los diferentes tipos de sensores"
+        "Realiza la lectura de las variables fisicas de los diferentes tipos de sensores"
         for sensor in sensor_list:
             self.data[sensor] = self.sensores[sensor].readData()
-        self.debug.printDebug(self.data)  # Debug
-        print("DATOS LEIDOS")
+        self.debug.printDebug("Conjunto de datos: ", self.data)  # Debug
         self.debug.visual()  # Debug
 
-    # def send_data(self):
-    #     "Envia los datos de los diferentes sensores haciendo uso del protocolo MQTT"
-    #     for sensor in sensor_list:
-    #         for topic, data in self.data[sensor].items():
-    #             self.debug.printDebug((topic, data, self.data[sensor]["name"])
-    #             # self.debug.printDebug(topic)  # Debug
+    def saveData(self):
+        "Guarda los datos en un archivo de texto plano con formato CSV"
+        for sensor in sensor_list:
+            humedad, name, temperatura = self.data[sensor].items()
+            try:
+                self.f_cultivo = open('data.csv', 'a')
+                self.f_cultivo.write(str(temperatura[1]) + ", " + str(humedad[1]) + "\n")
+                self.f_cultivo.close()
+                self.debug.printDebug("Datos Guardados Correctamente\n")  # Debug
+            except Exception as e:
+                self.debug.printDebug("Problema Almacenando los datos. Error: ", e)  # Debug

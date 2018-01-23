@@ -17,12 +17,13 @@ class DHT22():
         "Obtiene de los sensores los datos de Temperatura/Humedad"
         try:
             self.s_dht.measure()
-            self.debug.printDebug(self.name)
+            self.debug.printDebug("\nNombre Sensor: ", self.name)
+            self.debug.printDebug("Datos Leidos: ")
             self.debug.printDebug(
                 ("Temperatura ", self.s_dht.temperature()))  # Debug
             self.debug.printDebug(
                 ("Humedad  ", self.s_dht.humidity()))  # Debug
             return({self.temp: self.s_dht.temperature(), self.hume: self.s_dht.humidity(), "name": self.name})
-        except Exception as e:
+        except Exception as error:
             self.debug.printDebug(
-                ("No fue posible la lectura de Datos error:", e))  # Debug
+                ("No fue posible la lectura de Datos error:", error))  # Debug
