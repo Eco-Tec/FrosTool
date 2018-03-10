@@ -1,4 +1,4 @@
-#Linux directory
+﻿#Linux directory
 .directory
 # KiCad files
 *.bak
@@ -7,10 +7,10 @@
 .FCStd1
 /3D-Model/Node/*.fcstd1
 /3D-Model/Broker/*.fcstd1
-/3D-Model/*.fcstd1
 # Design temp
-3D-Model/Node/Nodo_V1.fcstd
-3D-Model/Node/Tubo.fcstd
+/3D-Model/Node/*.fcstd
+/3D-Model/Broker/*.fcstd
+
 
 # Config ESP8266
 /Software/Node-ESP8266/config.py
