@@ -8,7 +8,7 @@ except ImportError:
 
 
 class Bootloader():
-    def __init__(self, ip= "192.168.31.166", port = 45):
+    def __init__(self, ip= "192.168.31.166", port = 92):
         self.sock = socket.socket()
         self.ip = ip
         self.port = port
@@ -26,16 +26,17 @@ class Bootloader():
 
     def state(self):
         self.sock.bind((self.ip, self.port))
-        self.sock.listen(0)
+        self.sock.listen(1)
         print("Esperando conexion ....")
         self.conn, self.addr = self.sock.accept()
         print("Conexion aceptada....")
-        self.send_file("/home/game/plantilla.txt")
         self.recivir()
+        self.send_file("/home/game/plantilla.txt")
+        
     
     def recivir(self):
         #while True:
-        print(self.conn.recv(256))
+        print(self.conn.recv(2))
                   
 
     def send_file(self, name):

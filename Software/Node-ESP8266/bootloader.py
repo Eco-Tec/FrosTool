@@ -38,12 +38,13 @@ class Bootloader():
             self.wifi_init()
             self.wifi_connect()
             self.sock = socket.socket()
-            self.addr = socket.getaddrinfo(BROKER, 45)[0][-1]
+            self.addr = socket.getaddrinfo(BROKER, 92)[0][-1]
             print(self.addr)
             #self.mqtt = MQTT(self.debug)
             #self.mqtt.connect()
             self.sock.connect(self.addr)
             self.sock.send("/firware/"+ str(NAME))
+            self.sock.close()
             #self.mqtt.send_boot("/firmware/" + NAME, self.firmware)
             #self.save_file("plantilla.txt")
             #self.mqtt.disconnect()
