@@ -11,6 +11,7 @@
     Hardware: ESP8266
     Pin distribution(Default)
     Pin 4   ->  Pin sensor(DHT11/DHT22), Data(IN)
+    Pin
     Pin 2   ->  Debug Visual(Default=Off), Led On Userled: for development board ESP8266
 """
 
